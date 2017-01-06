@@ -1,19 +1,27 @@
-// var endpoint = get(" www.demo3354820.mockable.io/menu/sushi");
+var getJSON = function(url) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status == 200) {
+        resolve(xhr.response);
+      } else {
+        reject(status);
+      }
+    };
+    xhr.send(null);
+  });
+};
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', "http://www.demo3354820.mockable.io/menu/sushi", true)
-xhr.send();
+getJSON("http://demo3354820.mockable.io/menu/sushi").then(function(data) {
+    alert('Your Json result is:  ' + data.responseText); //you can comment this, i used it to debug
 
-console.log(xhr.status);
-console.log(xhr.statusText);
+    result.innerText = data.responseText; //display the result in an HTML element
+}, function(status) { //error detection....
+  alert('Something went wrong.');
+});
 
 
 
-// xhr.onreadystatechange = processRequest;
-
-// function processRequest(e) {
-//     if (xhr.readyState == 4 && xhr.status == 200) {
-//         var response = JSON.parse(xhr.responseText);
-//         alert(response.ip);
-//     }
-// }
