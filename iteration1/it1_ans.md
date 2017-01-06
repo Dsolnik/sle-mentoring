@@ -58,18 +58,22 @@ Watch:
 Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section only - credentials given via text -
 
 ##Arrays (Memorize Each)
-**Motive:** Javascript is a small enough language to easily familiarize and gain proficiency within a couple days. Doing so will speed your dev process up incredibly. 
-1. Array.prototype.push()
-2. Array.prototype.pop()
-3. Array.prototype.slice()
-4. Array.prototype.shift()
-5. Array.prototype.unshift()
-6. Array.prototype.length;
+**Motive:** Javascript is a small enough language to easily familiarize and gain proficiency within a couple days. Doing so will speed your dev process up incredibly:
+1. Array.prototype.push(): Adds one or more elements to the end of an array and returns the new length of the array
+2. Array.prototype.pop(): removes the **last** element from an array and returns that element. This method changes the length of the array.
+3. Array.prototype.slice(): returns a portion of an array into a new array object selected from begin to end (end not included). The original array will not be modified.
+4. Array.prototype.shift(): removes the **first** element from an array and returns that element. This method changes the length of the array.
+5. Array.prototype.unshift(): adds one or more elements to the beginning of an array and returns the new length of the array.
+6. Array.prototype.length: returns the number of elements in an array, that is always numerically greater than the highest index in the array.
 
 ##The language
  * Some call Javascript a functional language, others call it an imperative language, others an object-oriented language. What do these terms mean and which is it? 
+ 	* Functional: based around functions; functions are first class citizens - functions can take other functions as arguments and return new functions
+ 	* Imperative: a style that programs by explicitly stating the exact steps the program should take throughout its execution
+ 	* Object-Oriented: program is made of stateful "objects" which support certain operations whose implementation and internal structure is hidden from the outside.
 
 * The phrase "functions are first class citizens" is thrown around frequently in JS land. What does this mean?
+	* functions are first class citizens - functions can take other functions as arguments and return new functions
 
 
 ---
