@@ -80,6 +80,7 @@ Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section o
 ---
 #Part 3: Supplemental
 1. What is ES6? ECMAScript? 
+	* ECMAScript is a Standard for a scripting languages. ES6 is ECMAScript 6, the upcoming sixth release of the ECMAScript language specification.
 2. What does Node.js do?
 3. What is the technology that Node.js uses that Google Chrome does as well?
 4. What is Babel? 
