@@ -82,8 +82,11 @@ Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section o
 1. What is ES6? ECMAScript? 
 	* ECMAScript is a Standard for a scripting languages. ES6 is ECMAScript 6, the upcoming sixth release of the ECMAScript language specification.
 2. What does Node.js do?
+	* Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
 3. What is the technology that Node.js uses that Google Chrome does as well?
+	* They both use the V8 Javascript Engine; an open source JavaScript engine developed by The Chromium Project for the Google Chrome web browser
 4. What is Babel? 
+	* Babel is a transpiler for JavaScript best known for its ability to turn ES6 (the next version of JavaScript) into code that runs in your browser (or on your server) today. 
 
 
 #Expansions (for stevie to note)
