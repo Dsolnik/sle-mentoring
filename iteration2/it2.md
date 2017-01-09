@@ -4,6 +4,13 @@ An easy way to write quick code snippets is to use something like www.codepen.io
 
 Save these snippets to later show me what you learned and demonstrated through the code.
 
+For the project, make sure you understand what EVERY line of your code does. Have a motive behind writing each line and understand how it works. 
+
+#Part 0 (Debugging)
+https://www.codeschool.com/courses/discover-devtools
+
+You do not have to complete all sections or go through this that rigorously. It's important though that you know what tools are available. It'll help you get a better grasp on the underlying mechanisms of Javascript and get through bugs in your project code. 
+
 #Part 1 (Project-oriented)
 ##Questions to answer for project prior to completion
 1. How are Javascript files loaded? 
@@ -76,5 +83,21 @@ If you have time read a little bit on the module pattern.
 #Part 4: Review
 Is javascript a functional or object-oriented language?  
 What do first-class functions offer to javascript programmers?  
+
+#Part 5: Supplement
+What are the five categories of status codes?
+* 1xx
+* 2xx
+* 3xx
+* 4xx
+* 5xx
+
+Memorize the following status codes:
+200
+401
+403
+404
+500
+
 
 
