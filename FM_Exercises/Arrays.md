@@ -16,15 +16,15 @@ Create an array.
 Using a [native array method](http://www.w3schools.com/jsref/jsref_obj_array.asp)…
 
 - Add a noise to the beginning of the `noiseArray`.
-	* `noiseArray.unshift("noise0");
+	* `noiseArray.unshift("noise0");`
 - Add another noise to the end of the `noiseArray`.
-	* `noiseArray.push("noise1");
+	* `noiseArray.push("noise1");`
 
 
 Using Bracket Notation…
 
 - add another noise to the end.
-	* noiseArray[2] = "noise2"
+	* `noiseArray[2] = "noise2"`
 
 Inspect the `noiseArray`
 
@@ -33,7 +33,7 @@ Inspect the `noiseArray`
 - What is the last index? How is it different than the length?
 	* Since Javascript arrays are zero-based, the last index is 2; the length is 3
 - Inspect your handiwork! What does it look like?
-	* `inspect(noiseArray) // length 3, indexes from [0-2]
+	* `inspect(noiseArray) // length 3, indexes from [0-2]`
 
 
 Nest the Array in the Object
