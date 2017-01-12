@@ -220,10 +220,10 @@ What are the five categories of status codes?
 * __5xx__: Server Error
 
 Memorize the following status codes:
-__200__: **OK**; standard response for successful HTTP requests
-__401__: **Unauthorized**; specifically for when authentication is required and has failed or has not yet been provided
-__403__: **Forbidden**; was a valid request, but the server is refusing to respond to it
-__404__: **Not Found**; the requested resouce could not be found, but may be available in the future
-__500__: **Internal Server Error**; A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
+* __200__: **OK**; standard response for successful HTTP requests
+* __401__: **Unauthorized**; specifically for when authentication is required and has failed or has not yet been provided
+* __403__: **Forbidden**; was a valid request, but the server is refusing to respond to it
+* __404__: **Not Found**; the requested resouce could not be found, but may be available in the future
+* __500__: **Internal Server Error**; A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
 
 
