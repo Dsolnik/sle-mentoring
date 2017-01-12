@@ -56,13 +56,11 @@ http://javascriptissexy.com/understand-javascript-callback-functions-and-use-the
 For this section, I want you to write code that tests out and demonstrates the concepts below
 Write a pure function. Write a non-pure function. Then explain why this is important in programming.
 
+* What is a Pure function?
+A: A pure fucntion doesn't depend on and doesn't modify the states of variables 
+out of its scope
+
 ```
-// What is a Pure function?
-// 
-// A: A pure fucntion doesn't depend on and doesn't modify the states of variables 
-// out of its scope
-
-
 // *** IMPURE FUNCTION example *** 
 var values = { a: 1 };
 
@@ -92,14 +90,13 @@ function pureFunction ( a ) {
 
 // `values.a` has not been modified, it's still 1
 var c = pureFunction( values.a );
+```
 
-
-// Why are Pure functions so important?
-//
-// A: 
-//	* B/c they don't have any side effect; i.e., it doesn't modify the state of the sytem outside of their scope.
-//	*  They also simplify and clarify the code: when you call a pure function you just need to focus on the return
-// value as you already know you didn't break anything elsewhere doing so.
+* Why are Pure functions so important?
+A: 
+	* B/c they don't have any side effect; i.e., it doesn't modify the state of the sytem outside of their scope.
+	*  They also simplify and clarify the code: when you call a pure function you just need to focus on the return
+value as you already know you didn't break anything elsewhere doing so.
 
 
 Write code that tests and demonstrates the prototype chain.
