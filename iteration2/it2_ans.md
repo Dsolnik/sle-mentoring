@@ -99,24 +99,74 @@ var c = pureFunction( values.a );
 value as you already know you didn't break anything elsewhere doing so.
 
 
-Write code that tests and demonstrates the prototype chain.
+Write code that tests and demonstrates the prototype chain.  
+```
+function Animal() {}
+
+function Animal(name) {
+	// Instance properties can be set on each instance of the class
+	this.name = name;
+}
+
+// Prototype properties are shared across all instances of the class
+// However, they can still be overwritten on a per-instance basis
+// with the 'this' keyword.
+Animal.prototype.speak = function() {
+	console.log("My name is " + this.name);
+};
+
+var animal = new Animal('Monty');
+animal.speak(); // My name is Monty
+
+
+// exetending the Animal class to create a Cat class...
+
+function Cat(name) {
+	// We want to set the 'this' value inside the called function's scope, instead of
+	// this.name being set inside the Animal constructor
+	Animal.call(this, name);
+}
+
+// Cat.protype will inherit all of Animal's properties
+Cat.prototype = new Animal();
+
+var cat = new Cat('Monty');
+cat.speak();
+```
 
 Write code that shows that many things in Javascript is an object.
+```
+var myArray = [];
+myArray instanceof Object // returns true
+
+var myObject = {};
+myObject instanceof Object // returns true
+
+function myFunction() {}
+myFunction instanceof Object // returns true
+```
 
 Write some IIFEs.
 
 * What is the prototype chain?
-	* Each object has an internal property called prototype, which links to another object. The prototype object has a prototype object of its own, and so on – this is referred to as the **prototype chain**.
+	* Each object has an internal property called prototype, which links to another object. The prototype object has a prototype object of its own, and so on – this is referred to as the **prototype chain**. This behaviour allows us to implement inheiritance. 
 * What is a pure function?
 	* A pure fucntion doesn't depend on and doesn't modify the states of variables out of its scope
 * In Javascript, people frequently say everything is an object. Explain what this means
 	* 'Everything is an object', means that, in JavaScript, a function is an object. 
 * Does Javascript have block scope? 
-	*
+	* **JavaScript does NOT have block scope**. Variables introduced within a block are scoped to the containing function or script, and the effects of setting them persist beyond the block itself.
 * What is an IIFE?
+	* Immediately Invoked Function Expression; a JavaScript function that runs as soon as it is defined. This is used primarly to avoid polluting the global namespace, because all the variables used inside the IIFE (as with any other _normal_ function) are not visible outside its scope.
+	
 ---
 #Part 3: Project Expansions
 * What is MVC? How does it compare to the idea of separation of presentation and content?
+	* MVC stands for Model, View, Controller. An MVC design is essentially an implmentation of seperation of presentation and content (i.e., seperation of concerns), where:
+		- Model: represents a listener pattern - when the data changes, it triggers some event
+		- View: Represents the UI. It listens to the model events and changes when the model changes. It also implements a listener pattern. When the user does something, like clicking a box, it triggers an event.
+		- Controller: Listens to the UI events from the View and calls model methods accordingly.
+		
 Now read this:
 https://addyosmani.com/resources/essentialjsdesignpatterns/book/#singletonpatternjavascript
 Read on the following patterns:
