@@ -1,6 +1,8 @@
 // January 10, 2016 -- JS scratchpad
 
+// ******************************
 // Prototypes...
+// ******************************
 
 function Animal() {}
 
@@ -34,9 +36,9 @@ Cat.prototype = new Animal();
 var cat = new Cat('Monty');
 cat.speak();
 
-
+// ******************************
 // JavaScript Constructors...
-
+// ******************************
 
 //Constructor
 var LivingEntity = function(location){  
@@ -62,4 +64,34 @@ dog.moveWest = function(){
 // LivingEntity objects
 LivingEntity.prototype.moveWest = function(){
 	this.x--;
+}
+
+// ******************************
+// Singletons
+// ******************************
+
+var Singleton = (function () {
+    var instance;
+ 
+    function createInstance() {
+        var object = new Object("I am the instance");
+        return object;
+    }
+ 
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+ 
+function run() {
+ 
+    var instance1 = Singleton.getInstance();
+    var instance2 = Singleton.getInstance();
+ 
+    alert("Same instance? " + (instance1 === instance2));  
 }
