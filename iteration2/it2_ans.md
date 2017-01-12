@@ -168,10 +168,40 @@ Write some IIFEs.
 		- Controller: Listens to the UI events from the View and calls model methods accordingly.
 		
 Now read this:
-https://addyosmani.com/resources/essentialjsdesignpatterns/book/#singletonpatternjavascript
-Read on the following patterns:
-1. Constructor
+https://addyosmani.com/resources/essentialjsdesignpatterns/book/#singletonpatternjavascript  
+Read on the following patterns:  
+1. Constructor  
 2. Singleton
+	- The Singleton pattern exists because it restricts instantiation of a class to a single object. That means, in the event of an instance already existing, it simply returns a reference to that object.
+	
+```
+var Singleton = (function () {
+    var instance;
+ 
+    function createInstance() {
+        var object = new Object("I am the instance");
+        return object;
+    }
+ 
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+ 
+function run() {
+ 
+    var instance1 = Singleton.getInstance();
+    var instance2 = Singleton.getInstance();
+    
+    // Since instance1 already exists, instance 2 is just a ref. so it will return true
+    alert("Same instance? " + (instance1 === instance2));  
+}
+```
 
 Implement the constructor pattern for your project above.
 
