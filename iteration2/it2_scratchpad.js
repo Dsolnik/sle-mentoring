@@ -95,3 +95,135 @@ function run() {
  
     alert("Same instance? " + (instance1 === instance2));  
 }
+
+// ******************************
+// Frontend Masters: Functions
+// ******************************
+
+// arguments keyword returns an array of the arguments passed in
+var add = function(a, b){
+	console.log(arguments); // logs [a,b]
+    return a + b;
+};
+
+// to add a function with a dynamic # of parameters!
+var add = function(a, b){
+	results = 0;
+	for(var i = 0; i < arguments.length; i++){
+		results += arguments[i];
+	}
+	
+	return results
+}
+
+add(1, 2, 3, 4) // returns 10
+
+// *** Looping
+
+
+// a constructor function with property of 'speak'
+function AnimalMaker(name) {
+  return { 
+    speak: function () { 
+      console.log("my name is ", name); 
+    } 
+  };
+};
+
+// how do we loop through the animalNames and create an animal object with each one and store it in farm[]?
+
+function AnimalMaker(name) {
+  return { 
+    speak: function () { 
+      console.log("my name is ", name); 
+    },
+    name: name
+  };
+};
+
+var animalNames = ['Sheep', 'Liger', 'Big Bird'];
+
+var farm = [];
+
+
+// recall 'for(var key in ___)' is for objects...
+for(var i = 0; i < animalNames.length; i++ ){
+	farm.push(AnimalMaker(animalNames[i]));
+	console.log("Sucessfully created ", animalNames[i]);
+}
+
+
+
+// ******************************
+// Frontend Masters: Nesting
+// ******************************
+
+var box = {};
+box.innerbox = {};
+
+// putting an obect inside an object
+box['innerbox'] = {};
+box['innerbox']['full'] = true;
+// OR can do
+box['innerbox'].full = true;
+
+box.innerbox.babyBox = {};
+box.innerbox['babyBox'].says = "What's up!?";
+
+
+// ******************************
+// Frontend Masters: Scope
+// ******************************
+
+
+// Child has access to Parent scope; Parent doesn't have access to child scope
+var g = 'global'; 
+
+function blender(fruit) { 
+  var b = fruit; 
+  var y = 'yogurt';
+ 
+  function bs() { 
+    alert( b + ' and ' + y + ' makes ' + b + ' swirl'); 
+  } 
+  bs(); 
+} 
+
+blender('blueberry');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
