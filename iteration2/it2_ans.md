@@ -60,7 +60,7 @@ Write a pure function. Write a non-pure function. Then explain why this is impor
 **A**: A pure fucntion doesn't depend on and doesn't modify the states of variables 
 out of its scope
 
-```
+```javascript
 // *** IMPURE FUNCTION example *** 
 var values = { a: 1 };
 
@@ -100,7 +100,7 @@ value as you already know you didn't break anything elsewhere doing so.
 
 
 Write code that tests and demonstrates the prototype chain.  
-```
+```javascript
 function Animal() {}
 
 function Animal(name) {
@@ -135,7 +135,7 @@ cat.speak();
 ```
 
 Write code that shows that many things in Javascript is an object.
-```
+```javascript
 var myArray = [];
 myArray instanceof Object // returns true
 
