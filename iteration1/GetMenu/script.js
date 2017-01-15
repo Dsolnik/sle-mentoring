@@ -6,14 +6,20 @@ var getJSON = function(url) {
     xhr.onload = function() {
       var status = xhr.status;
       if (status == 200) {
-        resolve(xhr.response);
+        resolve(xhr.response); 
       } else {
-        reject(status);
+        reject(status); 
       }
     };
     xhr.send(null);
   });
 };
+
+//Add Event Handler to the Button Click
+//Event: Button Click
+//Function: getJSON
+//if jquery
+$("#example").on('click', getJSON("http://demo3354820.mockable.io/menu/sushi"));
 
 getJSON("http://demo3354820.mockable.io/menu/sushi").then(function(data) {
     alert('Your Json result is:  ' + data.responseText); //you can comment this, i used it to debug

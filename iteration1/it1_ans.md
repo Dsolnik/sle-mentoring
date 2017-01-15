@@ -89,5 +89,3 @@ Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section o
 * Explore MVC
 * Separation of presentation and content is challenged by what?
 * What happens when you go to the endpoint via a Browser?
-
-
