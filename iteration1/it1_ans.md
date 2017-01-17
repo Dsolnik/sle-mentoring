@@ -59,12 +59,13 @@ Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section o
 
 ##Arrays (Memorize Each)
 **Motive:** Javascript is a small enough language to easily familiarize and gain proficiency within a couple days. Doing so will speed your dev process up incredibly:
-1. Array.prototype.push(): Adds one or more elements to the end of an array and returns the new length of the array
-2. Array.prototype.pop(): removes the **last** element from an array and returns that element. This method changes the length of the array.
-3. Array.prototype.slice(): returns a portion of an array into a new array object selected from begin to end (end not included). The original array will not be modified.
-4. Array.prototype.shift(): removes the **first** element from an array and returns that element. This method changes the length of the array.
-5. Array.prototype.unshift(): adds one or more elements to the beginning of an array and returns the new length of the array.
-6. Array.prototype.length: returns the number of elements in an array, that is always numerically greater than the highest index in the array.
+
+1. Array.prototype.push(): Adds one or more elements to the end of an array and returns the new length of the array 
+2. Array.prototype.pop(): removes the **last** element from an array and returns that element. This method changes the length of the array. 
+3. Array.prototype.slice(): returns a portion of an array into a new array object selected from begin to end (end not included). The  original array will not be modified. 
+4. Array.prototype.shift(): removes the **first** element from an array and returns that element. This method changes the length of the array. 
+5. Array.prototype.unshift(): adds one or more elements to the beginning of an array and returns the new length of the array. 
+6. Array.prototype.length: returns the number of elements in an array, that is always numerically greater than the highest index in the array. 
 
 ##The language
  * Some call Javascript a functional language, others call it an imperative language, others an object-oriented language. What do these terms mean and which is it? 
@@ -79,9 +80,13 @@ Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section o
 ---
 #Part 3: Supplemental
 1. What is ES6? ECMAScript? 
+	* ECMAScript is a Standard for a scripting languages. ES6 is ECMAScript 6, the upcoming sixth release of the ECMAScript language specification.
 2. What does Node.js do?
+	* Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
 3. What is the technology that Node.js uses that Google Chrome does as well?
+	* They both use the V8 Javascript Engine; an open source JavaScript engine developed by The Chromium Project for the Google Chrome web browser
 4. What is Babel? 
+	* Babel is a transpiler for JavaScript best known for its ability to turn ES6 (the next version of JavaScript) into code that runs in your browser (or on your server) today. 
 
 
 #Expansions (for stevie to note)
