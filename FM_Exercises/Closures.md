@@ -130,7 +130,44 @@
 
 1. [EXTRA CREDIT] Use the module pattern to design a character in a Super Mario game. Think about what actions you can control in the game and other aspects you can't control directly (example:  you can only affect your health indirectly by eating a mushroom). If you are not familiar with Super Mario, choose another simple game for this example.
 
+  ```javascript
+  var marioBros = (function() {
+    // Private Methods & Properties
+    var healthBar = 1;
+
+    var healthBarStatus = function(healthBar) {
+      switch(healthBar) {
+        case 0:
+          text = "you are dead. GAME OVER.";
+          break;
+        case 2: 
+          text = "you are alive + powered up";
+          break;
+        default: 
+          text = "you are alive";
+      }
+      console.log(text);
+    };
+
+    var walk = function() { 
+      healthBar = Math.round(Math.random() * 2); 
+      console.log(healthBar);
+      return healthBar; 
+    };
+
+    // Public Methods & Properties
+    return {
+      // some stuff here...
+      startGame: function() { return healthBarStatus(walk()); },
+      getHealthBar: function() { return healthBar; }
+    };
+
+
+  })();
+  ```
+
 1. [EXTRA CREDIT] Why doesn't the code below work? This is a function that should return an array of functions that console.log() each person's name as a string when invoked. Fiddle with this function and inspect how it works, then try to fix it using a closure. Be prepared to explain to a partner how it worked before, and how it works now with a closure. 
+Here is a hint: http://jsfiddle.net/PuEy6/
 
   ```javascript
   var checkAttendanceFunc = function(nameArr){
@@ -141,6 +178,24 @@
     return resultArr;
   };
   ```
-  Here is a hint: http://jsfiddle.net/PuEy6/
+
+  The previous function doesn't work because after the function is invoked and executed, the object to be console logged is un-referable and as a consequence is collected by automatic garbage collection; i.e., it throws away any variables stored in the functional scope. 
+
+  // Amended version 
+  ```javascript
+  var checkAttendanceFunc = function(nameArr){
+      var resultArr = [];
+      var func = function() {
+        for(var i = 0; i < nameArr.length; i++){
+          nextName = console.log('Is', nameArr[i], 'present?', i);
+            resultArr.push(nextName);
+        console.log(resultArr[i]);
+         };
+      };
+
+      return func();
+  };
+  ```
+  This works, due to the fact that we're storing our console.log results in func(), an object we can refer to. Because our checkAttendanceFunc() returns the function func(); this way it retains the variables in it's functional scope.
 
 1. [EXTRA CREDIT] Write a function that takes another function\* as an argument and creates a version of the function that can only be called one time. Repeated calls to the modified function will have no effect, returning the value from the original call. How could you do this without using a closure? Is it even possible? How could you do this with a closure? \*Note: This original input function should *not* have any parameters.

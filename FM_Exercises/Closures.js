@@ -168,7 +168,7 @@ var Module = function(){
   };
 };
 
-
+// Another module pattern
 var Car = function() {
 	var gasolinelevel = 10;
 
@@ -191,22 +191,18 @@ var Car = function() {
 	};
 };
 
-// Module Super Mario Bros
+// CLosure shit 
+var checkAttendanceFunc = function(nameArr){
+    var resultArr = [];
+    var func = function() {
+    	for(var i = 0; i < nameArr.length; i++){
+    		nextName = console.log('Is', nameArr[i], 'present?', i);
+	        resultArr.push(nextName);
+			console.log(resultArr[i]);
+   		 };
+    };
 
-
-// Requirements:
-// Health Bar
-// Jump
-// Position
-
-
-var marioBros = (function() {
-
-
-
-
-})();
-
-
+    return func();
+};
 
 
