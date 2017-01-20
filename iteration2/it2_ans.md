@@ -14,8 +14,11 @@ You do not have to complete all sections or go through this that rigorously. It'
 #Part 1 (Project-oriented)
 ##Questions to answer for project prior to completion
 1. How are Javascript files loaded? 
+	* JS files are loaded in the order they are encountered in the page.
 2. What is the DOM? 
+	* Stands for Document Object Model; a tree structure model that represents the layout of the webpage
 3. What is AJAX? Explain in as much detail as possible.
+	* Stands for Asynchronous JavaScript And XML; a technique for achieving bi-directional, script driven communications between web browsers and servers via HTTP. Asynchronous Requests posted back to the server don’t cause the browser to block. The user can continue to use other parts of the application, and the UI can be updated to alert the user that a request is taking place.
 
 ##Project Summary (Part 1 should be completed)
 Create a web page with a button that says "Get Menu" on it. Upon clicking it,

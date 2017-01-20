@@ -1,44 +1,89 @@
-// Using jQuery
+// --------------------- Using Vanilla JS ------------------------------
 
-//When content has finished loading, execute this lambda function
-$(function() {
-  //Lets look for html with a class with .button and then attach an event handler
-  $(".button").on("click", function(e) {
-    //On click, we dont want default behavior of the browser
-    e.preventDefault();
-    //Sending a get request to url, after you get data...
-    $.get("http://demo3354820.mockable.io/menu/sushi", function(data){
-      //getting html with .result as the class, then replacing it with data return
+document.addEventListener("DOMContentLoaded", function() {
+
+  let getMenuButtonActions = (function() {
+    url = "http://demo3354820.mockable.io/menu/sushi";
+    // Define getRequest
+    var getRequest = function(url, cb) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onload = function () { cb(null, xhr.response); };
+      xhr.onerror = function () { cb(xhr.response); };
+      xhr.send();
+    };
+    // Define click handler
+    var clickHandler = function() {
+      getRequest(url, function(err, data){
+        if (err) { throw err; }
+        alert(" Data load success ");
+        data = JSON.stringify(data);
+        // when data is retrieved update div
+        var resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = data;
+      });
+
+    };
+    // append click handler to .onclick event listener
+    var button = document.getElementById("menuButton");
+    button.onclick = clickHandler;
+  })();
+
+
+});
+
+// --------------------- My Version Using jQuery ------------------------------
+$(function(){
+  
+  url = "http://demo3354820.mockable.io/menu/sushi";
+
+  // define get Request
+  var getRequest = function(url){
+    $.get(url, function(data){
       data = JSON.stringify(data);
+      alert("successful data retrieve");
       console.log(data);
-      // accessing the #result div and appending the html into it
-      $("#result").html(data);//text(data.menu["Dragon Roll"]);
-      alert( "Data load successful");
+      $("#result").html(data);
+      alert("changed posted");
     });
-    //
-  });
+  };
+
+  // Defining behavior
+  var clickHandler = function(cb) {
+    $("#menuButton").on('click', cb);
+  }
+
+  clickHandler(getRequest(url));
+
 });
 
 
-// ... Attempt at converting above to constructor format ...
 
+// --------------------- Stevie's Version Using jQuery ------------------------------
+// Make sure DOM is ready before any manipulation occurs
+$(function(){
 
-
-
-// Constructor: GET Request to URL
-function getJSON(url) {
-  return { 
-    data: function(url) {
-      $.get(url, function(data){
-        data = JSON.stringify(data);
-      });
+  // Defining behavior
+  let myModule = {
+    addClickHandler : function(cb) {
+      $(".button").on('click', cb);
+      console.log("addClickHandler successful");
     },
-    url: url
-  };
-}
+    sendGetRequest : function(url) {
+      return function(){
+        $.get(url, function(data){
+          data = JSON.stringify(data);
+          console.log(data);
+        $("#result").html(data);
+        alert( "Data load success");  
+        });
+      } 
+    }
+  }
 
-// // Constructor: stringify JSON
-// function JSONstringify(data){
-//   data = JSON.stringify(data);
-// }
+  // Using Behavior
+  myModule.addClickHandler(myModule.sendGetRequest("http://demo3354820.mockable.io/menu/sushi"));
+
+});
+
 
