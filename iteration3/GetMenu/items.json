@@ -1,0 +1,15 @@
+{
+   "item1" : {
+      "itemName" : "Sushi Roll",
+	  "Cost" : 10
+   },
+  "item2" : {
+      "itemName" : "Pizza",
+	  "Cost" : 11
+   },
+  "item3" : {
+      "itemName" : "Sandwich",
+	  "Cost" : 12
+   }
+   
+}
