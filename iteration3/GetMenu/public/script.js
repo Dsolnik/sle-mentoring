@@ -1,61 +1,60 @@
 // --------------------- Using Vanilla JS ------------------------------
 
-document.addEventListener("DOMContentLoaded", function() {
+// document.addEventListener("DOMContentLoaded", function() {
 
-  let getMenuButtonActions = (function() {
-    url = "http://demo3354820.mockable.io/menu/sushi";
-    // Define getRequest
-    var getRequest = function(url, cb) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.onload = function () { cb(null, xhr.response); };
-      xhr.onerror = function () { cb(xhr.response); };
-      xhr.send();
-    };
-    // Define click handler
-    var clickHandler = function() {
-      getRequest(url, function(err, data){
-        if (err) { throw err; }
-        alert(" Data load success ");
-        data = JSON.stringify(data);
-        // when data is retrieved update div
-        var resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = data;
-      });
+//   let getMenuButtonActions = (function() {
+//     url = "http://demo3354820.mockable.io/menu/sushi";
+//     // Define getRequest
+//     var getRequest = function(url, cb) {
+//       var xhr = new XMLHttpRequest();
+//       xhr.open('GET', url);
+//       xhr.onload = function () { cb(null, xhr.response); };
+//       xhr.onerror = function () { cb(xhr.response); };
+//       xhr.send();
+//     };
+//     // Define click handler
+//     var clickHandler = function() {
+//       getRequest(url, function(err, data){
+//         if (err) { throw err; }
+//         alert(" Data load success ");
+//         data = JSON.stringify(data);
+//         // when data is retrieved update div
+//         var resultDiv = document.getElementById("result");
+//         resultDiv.innerHTML = data;
+//       });
 
-    };
-    // append click handler to .onclick event listener
-    var button = document.getElementById("menuButton");
-    button.onclick = clickHandler;
-  })();
+//     };
+//     // append click handler to .onclick event listener
+//     var button = document.getElementById("menuButton");
+//     button.onclick = clickHandler;
+//   })();
 
-
-});
-
-// --------------------- My Version Using jQuery ------------------------------
-// $(function(){
-  
-//   url = "http://demo3354820.mockable.io/menu/sushi";
-
-//   // define get Request
-//   var getRequest = function(url){
-//     $.get(url, function(data){
-//       data = JSON.stringify(data);
-//       alert("successful data retrieve");
-//       console.log(data);
-//       $("#result").html(data);
-//       alert("changed posted");
-//     });
-//   };
-
-//   // Defining behavior
-//   var clickHandler = function(cb) {
-//     $("#menuButton").on('click', cb);
-//   }
-
-//   clickHandler(getRequest(url));
 
 // });
+
+// --------------------- My Version Using jQuery ------------------------------
+$(function(){
+  
+  url = "http://demo3354820.mockable.io/menu/sushi";
+
+  let clickMenuModule = {
+      getRequest: function(url){
+        return function() {
+            $.get(url, function(data){
+              data = JSON.stringify(data);
+              $("#result").html(data);
+           });
+         }
+      },
+      clickHandler: function(cb) {
+        $("#menuButton").on('click', cb);
+      }
+  }
+
+  // using behavior
+  clickMenuModule.clickHandler(clickMenuModule.getRequest(url));
+
+});
 
 
 
