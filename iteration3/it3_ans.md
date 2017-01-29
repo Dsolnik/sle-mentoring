@@ -8,7 +8,7 @@
 1. Node error-first callback pattern
 1. Codewars problems
 
-##Questions to Answers
+##Questions to Answer
 * What is the tradeoff on adding a method on the prototype vs on the actual object itself
 	* Methods that inherit via the prototype chain can be changed universally for all instances.
 	```javascript
@@ -35,17 +35,17 @@
 
 	    return res; 
 	}
-	```
 
-// Test the calc method:
-console.log(ins1.calc(1,1,1), ins2.calc(1,1,1));
-// -> 3, 3
+	// Test the calc method:
+	console.log(ins1.calc(1,1,1), ins2.calc(1,1,1));
+	// -> 3, 3
+	```
 	* Methods that are added to the actual object itself (i.e., inside the constructor), result in poorer performance, and consequently
 	a more tedious process if you want to change the methods to each instance of the constructor. 
 * What is temporal dependency?
 	* Temporal Dependency is when the outcome is influenced by the time that passes between the event and the response.
-* How does module.exports work inside Node?
-	* Module.exports is a way to modularize and compartmentalize your code. Think like important a package, or a local file
+* How does `module.exports` work inside Node?
+	* `Module.exports` is a way to modularize and compartmentalize your code. Think like important a package, or a local file
 
 
 ##Homework Questions from Async Videos:
@@ -58,4 +58,4 @@ console.log(ins1.calc(1,1,1), ins2.calc(1,1,1));
 	* process.nextTick() defers the execution of an action till the next pass around the event loop. 
 
 ###Questions Steven has for Stevie:
-* How does process.nextTick() influence async.waterfall and async.parallel?
+* How does `process.nextTick()` influence `async.waterfall` and `async.parallel`?
