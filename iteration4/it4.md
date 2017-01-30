@@ -15,12 +15,15 @@ __2. On Chrome, open up your inspector, hit the Application tab. There you will 
    Poke around and attempt to find out what these things are. Then do some research on them and write them out as done in iteration 3,2,1.
     
 __3. What is hashing? (10 words max)__
-   * Hashing is an injective transformation function, typically one-way. Used primarily for password security and protection.
+
+ Hashing is an injective transformation function, typically one-way. Used primarily for password security and protection.
    
 __4. What is encryption? (10 words max)__
+
  process of converting information or data into a code, especially to prevent unauthorized access. It is 2-way.
    
 __5. Choose between Google Login or Facebook Login.__
+
  Google Login?...
 
 Watch the following vids -- be ready to get quizzed on it as well as all the past iterations.
