@@ -6,16 +6,20 @@ This iteration we're going to be looking a little bit more into the technicaliti
 
 ##Questions to answer before proceeding.
 __1. What is a cookie?__
-   * small piece of data sent from a website and stored on the user's computer by the user's web browser. There is one for each website, and when you visit a website it's associated cookie is sent to the server. An example of this is your session token, to be able to stay logged in so you don't have to retype your password each time.  
+   * small piece of data sent from a website and stored on the user's computer by the user's web browser. There is one for each website, and when you visit a website it's associated cookie is sent to the server. An example of this is your session token, to be able to stay logged in so you don't have to retype your password each time.
+   
 __2. On Chrome, open up your inspector, hit the Application tab. There you will see the following three crucial items:__
     * Local Storage: locally stores named key/value pairs inside a client's web browser.
     * Session Storage: similar to localStorage, the only difference is while data stored in localStorage has no expiration set, data stored in session storage gets cleared when the page session ends. A page session lasts for as long as the browser is open and survives over page reloads and restores.
     * Cookies: refer to 1
-    Poke around and attempt to find out what these things are. Then do some research on them and write them out as done in iteration 3,2,1.  
+    Poke around and attempt to find out what these things are. Then do some research on them and write them out as done in iteration 3,2,1.
+    
 __3. What is hashing? (10 words max)__
-   * Hashing is an injective transformation function, typically one-way. Used primarily for password security and protection.  
+   * Hashing is an injective transformation function, typically one-way. Used primarily for password security and protection.
+   
 __4. What is encryption? (10 words max)__
-   * process of converting information or data into a code, especially to prevent unauthorized access. It is 2-way.  
+   * process of converting information or data into a code, especially to prevent unauthorized access. It is 2-way.
+   
 __5. Choose between Google Login or Facebook Login.__
    * Google Login?...
 
