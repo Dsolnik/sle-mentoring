@@ -15,6 +15,10 @@ This iteration we're going to be looking a little bit more into the technicaliti
 4. What is encryption? (10 words max)
 5. Choose between Google Login or Facebook Login.
 
+Watch the following vids -- be ready to get quizzed on it as well as all the past iterations.
+https://www.youtube.com/watch?v=8ZtInClXe1Q
+https://www.youtube.com/watch?v=b4b8ktEV4Bg
+
 ##Project Improvements
 1. Implement SSO with the choice in number 5 above.  - Some things to note -- when doing this, only use the tools we've touched on so far. That is, Node, Express, Bootstrap(see point 2), async.js.
 if you have the time continue with the other things below.
@@ -24,4 +28,8 @@ if you have the time continue with the other things below.
 #Part 3: JS Tools
 1. Do some research on ReactJS, what is the philosophy behind it? 
 2. What is a build system? 
+
+
+
+#Part 4: Extra Credit (To Come... more research on networks)
 
