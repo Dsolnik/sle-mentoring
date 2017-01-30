@@ -14,8 +14,9 @@ This iteration we're going to be looking a little bit more into the technicaliti
 3. What is hashing? (10 words max)
 4. What is encryption? (10 words max)
 5. Choose between Google Login or Facebook Login.
+
 ##Project Improvements
-1. Implement SSO with the choice in number 5 above. 
+1. Implement SSO with the choice in number 5 above.  - Some things to note -- when doing this, only use the tools we've touched on so far. That is, Node, Express, Bootstrap(see point 2), async.js.
 if you have the time continue with the other things below.
 2. Download Bootstraps Grid System (ONLY THE GRID, no other assets).
 3. ATTEMPT to implement GrubHubs fixed header with your button being on the top right. 
@@ -23,3 +24,4 @@ if you have the time continue with the other things below.
 #Part 3: JS Tools
 1. Do some research on ReactJS, what is the philosophy behind it? 
 2. What is a build system? 
+
