@@ -22,7 +22,9 @@ __4. What is encryption? (10 words max)__
    
 __5. Choose between Google Login or Facebook Login.__
  * Google Login?...
+ 
 
+------------------------
 Watch the following vids -- be ready to get quizzed on it as well as all the past iterations.
 https://www.youtube.com/watch?v=8ZtInClXe1Q (How NOT to store passwords):
    1. Don't just store the user's password
@@ -34,6 +36,8 @@ https://www.youtube.com/watch?v=b4b8ktEV4Bg (Hashing Algorithms and Security - C
    1. Hashing shouldn't be too slow or too quick.
    2. Avalanche Effect on your hashes. A small change in a bit, should drastically change the entire hash
    3. Avoid Hash collisions, i.e., two documents that have the same hash.
+------------------------
+
 
 ##Project Improvements
 1. Implement SSO with the choice in number 5 above.  - Some things to note -- when doing this, only use the tools we've touched on so far. That is, Node, Express, Bootstrap(see point 2), async.js.
