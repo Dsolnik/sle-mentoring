@@ -18,10 +18,10 @@ __3. What is hashing? (10 words max)__
    * Hashing is an injective transformation function, typically one-way. Used primarily for password security and protection.
    
 __4. What is encryption? (10 words max)__
-   * process of converting information or data into a code, especially to prevent unauthorized access. It is 2-way.
+ process of converting information or data into a code, especially to prevent unauthorized access. It is 2-way.
    
 __5. Choose between Google Login or Facebook Login.__
-   * Google Login?...
+ Google Login?...
 
 Watch the following vids -- be ready to get quizzed on it as well as all the past iterations.
 https://www.youtube.com/watch?v=8ZtInClXe1Q (How NOT to store passwords):
