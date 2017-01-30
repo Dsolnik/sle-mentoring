@@ -30,6 +30,14 @@ if you have the time continue with the other things below.
 2. What is a build system? 
 
 
-
 #Part 4: Extra Credit (To Come... more research on networks)
+
+#Part 5: Feedback:
+If I may do so, in your answer files PLEASE write down 
+1. what was too hard for you
+2. what was too easy for you. 
+3. What felt just right? 
+4. Do you feel like you learned something substantial? Are you growing as an engineer? 
+5. Any other notes
+6. A rating 1-10.
 
