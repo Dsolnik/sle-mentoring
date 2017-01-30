@@ -5,18 +5,18 @@ We also got to refactor our code to utilize some of Javascript's most fundamenta
 This iteration we're going to be looking a little bit more into the technicalities behind networks and what really goes on underneath any connection. Then were going to attempt to prettify our project a little.
 
 ##Questions to answer before proceeding.
-1. What is a cookie?
+__1. What is a cookie?__
    * small piece of data sent from a website and stored on the user's computer by the user's web browser. There is one for each website, and when you visit a website it's associated cookie is sent to the server. An example of this is your session token, to be able to stay logged in so you don't have to retype your password each time.
-2. On Chrome, open up your inspector, hit the Application tab. There you will see the following three crucial items:
+__2. On Chrome, open up your inspector, hit the Application tab. There you will see the following three crucial items:__
     * Local Storage: locally stores named key/value pairs inside a client's web browser.
     * Session Storage: similar to localStorage, the only difference is while data stored in localStorage has no expiration set, data stored in session storage gets cleared when the page session ends. A page session lasts for as long as the browser is open and survives over page reloads and restores.
     * Cookies: refer to 1
     Poke around and attempt to find out what these things are. Then do some research on them and write them out as done in iteration 3,2,1.
-3. What is hashing? (10 words max)
+__3. What is hashing? (10 words max)__
    * Hashing is an injective transformation function, typically one-way. Used primarily for password security and protection.
-4. What is encryption? (10 words max)
+__4. What is encryption? (10 words max)__
    * process of converting information or data into a code, especially to prevent unauthorized access. It is 2-way.
-5. Choose between Google Login or Facebook Login.
+__5. Choose between Google Login or Facebook Login.__
    * Google Login?...
 
 Watch the following vids -- be ready to get quizzed on it as well as all the past iterations.
