@@ -36,7 +36,7 @@ https://www.youtube.com/watch?v=b4b8ktEV4Bg (Hashing Algorithms and Security - C
    1. Hashing shouldn't be too slow or too quick.
    2. Avalanche Effect on your hashes. A small change in a bit, should drastically change the entire hash
    3. Avoid Hash collisions, i.e., two documents that have the same hash.
-------------------------
+
 
 
 ##Project Improvements
