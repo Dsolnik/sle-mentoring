@@ -14,11 +14,7 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 // loads index.ejs
-app.get('/', function (err, req, res) {
-  if(err) {
-    conosle.log('Error!', err);
-    return;
-  }
+app.get('/', function (req, res) {
   res.render('index');
 });
 
@@ -29,12 +25,12 @@ app.use(express.static(__dirname + '/public'));
 // API Stuff?..
 
 // list all itemsls
-app.get('/listItems', function (err, req, res) {
-  if(err) {
-    conosle.log('Error!', err);
-    return;
-  }
+app.get('/listItems', function (req, res) {
   fs.readFile( __dirname + "/" + "items.json", 'utf8', function (err, data) {
+     if(err) {
+        console.log('Error! ', err);
+        return;
+     }
      console.log( data );
      res.end( data );
   });
@@ -42,11 +38,7 @@ app.get('/listItems', function (err, req, res) {
 });
 
 
-app.post('/addItem', function (err, req, res) {
-  if(err) {
-    conosle.log('Error!', err);
-    return;
-  }
+app.post('/addItem', function (req, res) {
 	var itemName = req.body.itemName;
 	var Cost = req.body.Cost;
 	var data = {
@@ -63,35 +55,28 @@ app.post('/addItem', function (err, req, res) {
 })
 
 // get detail of items
-app.get('/:id', function (err, req, res) {
-  if(err) {
-    conosle.log('Error!', err);
-    return;
-  }
-  // First read existing items.
-  fs.readFile( __dirname + "/" + "items.json", 'utf8', function (err, data) {
-     items = JSON.parse( data );
-     var item = items["item" + req.params.id]
-     console.log( item );
-     res.end( JSON.stringify(item));
-  });
+app.get('/:id', function (req, res) {
+
+   // First read existing items.
+   fs.readFile( __dirname + "/" + "items.json", 'utf8', function (err, data) {
+       items = JSON.parse( data );
+       var item = items["item" + req.params.id]
+       console.log( item );
+       res.end( JSON.stringify(item));
+   });
 })
 
 // Delete
-app.delete('/deleteitem', function (err, req, res) {
-  if(err) {
-    conosle.log('Error!', err);
-    return;
-  }
+app.delete('/deleteitem', function (req, res) {
 
-  // First read existing items.
-  fs.readFile( __dirname + "/" + "items.json", 'utf8', function (err, data) {
-     data = JSON.parse( data );
-     delete data["item" + 2];
-     
-     console.log( data );
-     res.end( JSON.stringify(data));
-  });
+   // First read existing items.
+   fs.readFile( __dirname + "/" + "items.json", 'utf8', function (err, data) {
+       data = JSON.parse( data );
+       delete data["item" + 2];
+       
+       console.log( data );
+       res.end( JSON.stringify(data));
+   });
 })
 
 app.listen(3000, function () {

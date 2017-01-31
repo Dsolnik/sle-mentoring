@@ -43,6 +43,8 @@ $(function(){
             $.get(url, function(data){
               data = JSON.stringify(data);
               $("#result").html(data);
+           }).fail(function(){
+              console.log("Error! Get request incorrect");
            });
          }
       },
