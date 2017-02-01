@@ -35,8 +35,6 @@ You are limited to the following tools:
 
 No other tools are allowed.
 
-
-
 ---
 #Part 2: (Fundamentals of Javascript)
 Watch:
@@ -55,20 +53,3 @@ Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section o
  * Some call Javascript a functional language, others call it an imperative language, others an object-oriented language. What do these terms mean and which is it? 
 
 * The phrase "functions are first class citizens" is thrown around frequently in JS land. What does this mean?
-
-
----
-#Part 3: Supplemental
-1. What is ES6? ECMAScript? 
-2. What does Node.js do?
-3. What is the technology that Node.js uses that Google Chrome does as well?
-4. What is Babel? 
-
-
-#Expansions (for stevie to note)
-* Create the endpoint yourself
-* Explore MVC
-* Separation of presentation and content is challenged by what?
-* What happens when you go to the endpoint via a Browser?
-
-
