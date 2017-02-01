@@ -38,16 +38,16 @@ No other tools are allowed.
 ---
 #Part 2: (Fundamentals of Javascript)
 Watch:
-Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section only - credentials given via text -
+Frontendmasters: From fundamentals to functional js OBJECTS AND ARRAYS section only - credentials given via text -  
 
 ##Arrays (Memorize Each)
-**Motive:** Javascript is a small enough language to easily familiarize and gain proficiency within a couple days. Doing so will speed your dev process up incredibly. 
-1. Array.prototype.push()
-2. Array.prototype.pop()
-3. Array.prototype.slice()
-4. Array.prototype.shift()
-5. Array.prototype.unshift()
-6. Array.prototype.length;
+**Motive:** Javascript is a small enough language to easily familiarize and gain proficiency within a couple days. Doing so will speed your dev process up incredibly.   
+1. Array.prototype.push()  
+2. Array.prototype.pop()  
+3. Array.prototype.slice()  
+4. Array.prototype.shift()  
+5. Array.prototype.unshift()  
+6. Array.prototype.length;  
 
 ##The language
  * Some call Javascript a functional language, others call it an imperative language, others an object-oriented language. What do these terms mean and which is it? 
