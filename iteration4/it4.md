@@ -38,8 +38,31 @@ https://www.youtube.com/watch?v=b4b8ktEV4Bg (Hashing Algorithms and Security - C
    3. Avoid Hash collisions, i.e., two documents that have the same hash.
 
 
+##PROJECT RE-EVALUATED:
+Write code that does the following:
+1.Start off by taking a password: "password" and the salt: "s1a2l3t4" and writing a JSON object that represents this  and fill in the hash object aka {
+  password: "password",
+  salt: "s1a2l3t4",
+  hash: <fill this in>
+}
 
-##Project Improvements
+store this object in any variable on your server
+2. Have a form on a website with the fields: username and password
+3. Have it send a request to a route: /signin
+4. When the right username and password is sent in redirect to "/success" else "/failure"
+
+Additionally: You MAY use any sort of NPM library that lets you do MD5, SHA-1, or SHA-2 Hashes, that being said, MD5 is easiest to use but also the easiest to crack and not used for pw storage currently.
+
+For any extra time (and will leak over into IT5 anyways)
+5. Extract your code that handles password management into a separate file
+6. Write code that makes it impossible to open the /success write unless you are logged in.
+
+Some things to carefully note:
+* How am I sending this request? What method should I use and why does it make sense in this scenario?
+* How do I attach the Password and Username to this request?
+* We learned a concept above about cookies. Is it possible to use cookies to persist a login session?
+
+##Project Improvements (DEPRECATED READ ABOVE)
 1. Implement SSO with the choice in number 5 above.  - Some things to note -- when doing this, only use the tools we've touched on so far. That is, Node, Express, Bootstrap(see point 2), async.js.
 if you have the time continue with the other things below.
 2. Download Bootstraps Grid System (ONLY THE GRID, no other assets).
@@ -53,7 +76,7 @@ if you have the time continue with the other things below.
 #Part 4: Extra Credit (To Come... more research on networks)
 
 #Part 5: Feedback:
-If I may do so, in your answer files PLEASE write down 
+In your answer files PLEASE write down 
 1. what was too hard for you
 2. what was too easy for you. 
 3. What felt just right? 
