@@ -89,9 +89,9 @@ In your answer files PLEASE write down
 2. what was too easy for you: n/a
 3. What felt just right?: modularizing my express routes
 4. Do you feel like you learned something substantial? Are you growing as an engineer? 
- * I learned a great deal on the ideas of Hash + Salt, cookies, and how the browser stores data. I think I am slowly beginning to grow as an engineer. 
+ * I learned a great deal on the ideas of Hash + Salt, cookies, and how the browser stores data. I think I am slowly beginning to grow as an engineer.
 5. Any other notes
  * This week wasn't the best week for me in terms of JS self-esteem. I didn't feel like I was accomplishing much with this iteration's coding section. There's still a disconnect between the material and the actual coding; aside from learning the general overview and theory as to what hashing is, I didn't have enough of a build-up/sufficient practice to implement the remainder of what the coding part require. In previous iterations, when I had front-end masters, and did the coding examples alongside with those videos, it helped me a tremendous amount when it was time to implement the coding concepts.
-6. A rating 1-10.
+6. A rating 1-10:
  * 6/10
 
