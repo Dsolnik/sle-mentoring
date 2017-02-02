@@ -40,18 +40,19 @@ https://www.youtube.com/watch?v=b4b8ktEV4Bg (Hashing Algorithms and Security - C
 
 ##PROJECT RE-EVALUATED:
 Write code that does the following:
-
- 1. Start off by taking a password: "password" and the salt: "s1a2l3t4" and writing a JSON object that represents this  and fill in the hash object aka {
+1. Start off by taking a password: "password" and the salt: "s1a2l3t4" and writing a JSON object that represents this  and fill in the hash object aka 
+```javascript
+{
   password: "password",
   salt: "s1a2l3t4",
   hash: <fill this in>
 }
-
+```
 store this object in any variable on your server
 
- 2. Have a form on a website with the fields: username and password
- 3. Have it send a request to a route: /signin
- 4. When the right username and password is sent in redirect to "/success" else "/failure"
+2. Have a form on a website with the fields: username and password
+3. Have it send a request to a route: /signin
+4. When the right username and password is sent in redirect to "/success" else "/failure"
 
 Additionally: You MAY use any sort of NPM library that lets you do MD5, SHA-1, or SHA-2 Hashes, that being said, MD5 is easiest to use but also the easiest to crack and not used for pw storage currently.
 
