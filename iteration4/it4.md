@@ -74,6 +74,7 @@ if you have the time continue with the other things below.
 
 #Part 3: JS Tools
 1. Do some research on ReactJS, what is the philosophy behind it? 
+ * React is all about creating custom, reusable DOM elements and structuring the flow of data throughout the page, from actions taking place (example: user inputs text and pressed "return") to the view being updated. It's meant to provide a way to structure your interactions so that events that update the DOM flow through your components from highest in the DOM tree to lowest, updating the UI as changes happen that modify its state.
 2. What is a build system? 
 
 
@@ -81,10 +82,16 @@ if you have the time continue with the other things below.
 
 #Part 5: Feedback:
 In your answer files PLEASE write down 
-1. what was too hard for you
-2. what was too easy for you. 
-3. What felt just right? 
+1. what was too hard for you: 
+ - I struggled with the actual coding part of this iteration:
+  * Unsure of what examples to replicate/follow
+   * Would be great to see an example done prior (video or just plain code), to see how it's done, then try to do a rendition of the example. 
+2. what was too easy for you: n/a
+3. What felt just right?: modularizing my express routes
 4. Do you feel like you learned something substantial? Are you growing as an engineer? 
+ * I learned a great deal on the ideas of Hash + Salt, cookies, and how the browser stores data. I think I am slowly beginning to grow as an engineer. 
 5. Any other notes
+ - This week wasn't the best week for me in terms of JS self-esteem. I didn't feel like I was accomplishing much with this iteration's coding section. There's still a disconnect between the material and the actual coding; aside from learning the general overview and theory as to what hashing is, I didn't have enough of a build-up/sufficient practice to implement the remainder of what the coding part require. In previous iterations, when I had front-end masters, and did the coding examples alongside with those videos, it helped me a tremendous amount when it was time to implement the coding concepts.
 6. A rating 1-10.
+ - 6/10
 
