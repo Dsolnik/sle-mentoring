@@ -81,7 +81,7 @@ if you have the time continue with the other things below.
 #Part 4: Extra Credit (To Come... more research on networks)
 
 #Part 5: Feedback:
-In your answer files PLEASE write down 
+In your answer files PLEASE write down:
 1. what was too hard for you: 
  * I struggled with the actual coding part of this iteration:
   * Unsure of what examples to replicate/follow
