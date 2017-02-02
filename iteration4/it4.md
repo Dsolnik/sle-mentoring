@@ -40,6 +40,7 @@ https://www.youtube.com/watch?v=b4b8ktEV4Bg (Hashing Algorithms and Security - C
 
 ##PROJECT RE-EVALUATED:
 Write code that does the following:
+
 1. Start off by taking a password: "password" and the salt: "s1a2l3t4" and writing a JSON object that represents this  and fill in the hash object aka 
 ```javascript
 {
