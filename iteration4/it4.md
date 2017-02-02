@@ -82,10 +82,10 @@ if you have the time continue with the other things below.
 
 #Part 5: Feedback:
 In your answer files PLEASE write down:
+
 1. what was too hard for you: 
  * I struggled with the actual coding part of this iteration:
-  * Unsure of what examples to replicate/follow
-   * Would be great to see an example done prior (video or just plain code), to see how it's done, then try to do a rendition of the example. 
+  * Unsure of what examples to replicate/follow. Would be great to see an example done prior (video or just plain code), to see how it's done, then try to do a rendition of the example. 
 2. what was too easy for you: n/a
 3. What felt just right?: modularizing my express routes
 4. Do you feel like you learned something substantial? Are you growing as an engineer? 
