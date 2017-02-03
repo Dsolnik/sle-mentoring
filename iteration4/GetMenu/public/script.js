@@ -1,8 +1,18 @@
 // --------------------- My Version Using jQuery ------------------------------
 $(function(){
   
-  let hideValue = function() {
-    // console.log("stop");
+  var hideValue = function() {
+
+
+    // allTheseValues = ["#usernameField", "#passwordField"]
+    // // console.log("stop");
+    // $(allTheseValues).on("focus", 
+    //   function() {
+    //     this.value='';
+    // });
+    // // try apply || call for jQuery
+
+
     $("#usernameField").on("focus", 
       function() {
         this.value='';
@@ -11,15 +21,17 @@ $(function(){
       function() {
         this.value='';
     });
-  }
 
+  };
+
+  // aspply HideValue behavior onto relevant fields
   hideValue();
   
 
 
   url = "http://demo3354820.mockable.io/menu/sushi";
 
-  let clickMenuModule = {
+  var clickMenuModule = {
       getRequest: function(url){
         return function() {
             $.get(url, function(data){
@@ -28,12 +40,12 @@ $(function(){
            }).fail(function(){
               console.log("Error! Get request incorrect");
            });
-         }
+         };
       },
       clickHandler: function(cb) {
         $("#menuButton").on('click', cb);
       }
-  }
+  };
 
   // using behavior
   clickMenuModule.clickHandler(clickMenuModule.getRequest(url));
