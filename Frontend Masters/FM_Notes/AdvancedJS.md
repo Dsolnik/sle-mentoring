@@ -7,7 +7,7 @@ What you will need to know:
 	- Closure
 
 
-##Scopes
+##Scope
 * For assignment operators (i.e., = ); __LHS__ is the _target_, __RHS__ is the _Source_ 
 
 ```javascript
@@ -112,5 +112,54 @@ d; // 3 -- oops!
 ```
 
 * Best Rule-of-Thumb: Don't use `eval` or `with` keywords.
+
+
+###IIFE (Immediately Invoked Function Expression)
+* IFFE pattern is used to hide scope. This allows developers to create objects in their own scope without polluting the outer scope.
+```javascript
+var foo = "foo";
+
+(function() {
+    
+    var foo = "foo2";
+    console.log(foo); // "foo2"
+})();
+
+console.log(foo); // "foo"
+```
+
+
+###Block Scope of ES6
+* `var` declarations attach to the function scope
+* `let` declarations attach to the block scope (in between any two pairs of curly braces {} )
+
+###Problems with `let` Keyword
+* `let` declarations doesn't hoist
+
+### Hoisting
+* __Hoisiting__ is the moving of declarations to the top of the scope during the compiling phase. 
+* All LHS stuff happens at compile phase, and all RHS happens at execution phase
+
+```javascript 
+var a = b();
+var c = d();
+a; // ???
+c; ///?
+
+// this function expression gets hoisted
+function b() {
+    return c;
+}
+
+// this will not be hoisted 
+var d = function() {
+    return b();
+};
+```
+
+* the _function expression_ __WILL NOT__ get hoisted, _but_ the _function declaration_ will.
+* Good rule of thumb: the compiler always pulls out the declarations first.
+
+###`this` keyword
 
 
