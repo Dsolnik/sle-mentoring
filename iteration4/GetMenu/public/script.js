@@ -4,12 +4,12 @@ $(function(){
   var hideValue = function() {
 
 
-    // allTheseValues = ["#usernameField", "#passwordField"]
+    // allTheseValues = ["#usernameField", "#passwordField"];
     // // console.log("stop");
-    // $(allTheseValues).on("focus", 
-    //   function() {
-    //     this.value='';
-    // });
+    // $(allTheseValues).each(function(id) {
+    //   console.log(id)
+    //   // $(id).on("focus", function() { this.value=''; });
+    // }); 
     // // try apply || call for jQuery
 
 
