@@ -72,6 +72,45 @@ console.log(err); // Reference Error
 * The reason why there is a `Reference Error` is because `err` is within _block scope_ of the try catch.
 
 ### Lexical Scope
+* _Lexical Scoping_ means compile time scope; compiler decides your scope. Can think of it as Nested Scope Bubbles
+* Cheating Lexical Scope: `eval`:
+    - The follow code snippet will show how to 'cheat' the default lexical decision of the compiler, by allowing the string `str` to be executed at runtime.
+        + IF you use `strict mode` it will allow the `eval` code to have it
+```javascript
+var bar = "bar";
 
-* _Lexical Scoping_ means compile time scope; compiler decides your scope
-* 
+function foo(str) {
+    eval(str); // cheating
+    console.log(bar); // 42
+}  
+
+foo("var bar = 42;");
+```
+
+
+* `with` keyword is useful for eliminating repetitive object references:
+* Problems with `with`:
+    - Prone to creating global variables. Look at the variable `d` in the following code snippet to see how it gets sent to the global scope
+```javascript
+var obj = {
+    a: 2,
+    b: 3, 
+    c: 4
+};
+
+obj.a = obj.b + obj.c;
+obj.c = obj.b - obj.a;
+
+with (obj) {
+    a = b + c;
+    d = b - a;
+    d = 3; //??
+}
+
+obj.d; // undefined
+d; // 3 -- oops!
+```
+
+* Best Rule-of-Thumb: Don't use `eval` or `with` keywords.
+
+
