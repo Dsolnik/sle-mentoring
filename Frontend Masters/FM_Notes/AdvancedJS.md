@@ -296,5 +296,22 @@ var baz = new foo();
     3. __`.constructor.prototype`__
 
 ##Async Patterns
-**
+* _Inversion of Control_: in terms of callbacks, when have a `callback` function -- we are essentially passing off control of the program to a 3rd party API
+
+###Solving Callback Problems
+* _Run to Completion Invariant_:  As soon as a function starts executing it's first line of code, we _assume_ that it will finish all those lines of code before any other code runs. 
+
+* __Generators (as of ES6)__ The _Run to Completion Invariant_ is true of all normal functions, but NOT Generators
+    - _syntax_ `function * gen() {} `
+
+```javascript
+function* gen() {
+    console.log("Hello");
+    yield null;
+    console.log("World!");
+}
+
+var it = gen();
+it.next(); //prints "Hello"
+it.next(); //prints "World"
 
