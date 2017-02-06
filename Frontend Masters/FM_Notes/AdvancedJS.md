@@ -285,35 +285,16 @@ var baz = new foo();
     
 ##Object-Oriented JS
 
-* Topics to cover:
-    - Common OO Patterns
-    - Prototype
-    - "Inheritance" vs. "Behavior Delegation"
 
 ###Prototypes Explained
-* a __Dunder Proto__ `__proto__` is a getter function. 
+* __What is a constructor?__A function that is called with the `new` keyword
+* What is a `[[Prototype]]` and where does it come from? It is a linkage from one object to another object. It comes from `object.create` or we can get it indirectly, 
+* __How does a `[[Prototype]]` affect an object?__ We can call a property/method on an object reference, and if it can't handle that property/method reference, it delegates up to the prototype chain to a different object.
+* __How do we find out where an object's ``[[Prototype]]`` points to (3 ways)?__:
+    1. __Dunder Proto__; `__proto__`
+    2. __`Object.getPrototypeOf()`__
+    3. __`.constructor.prototype`__
 
-
-```javascript
-function Foo(who) {
-    this.me = who;
-} 
-Foo.prototype.identify = function() {
-    return "I am" + this.me;
-};
-
-var a1 = new Foo("a1");
-var a2 = new Foo("a2");
-
-a2.speak = function() {
-    alert("Hello, " + this.identify() + ".");
-};
-
-a1.constructor == Foo;
-a1.constructor === a2.constructor;
-a1.__proto__ === Foo.prototype;
-a1.__proto__ === a2.__proto__;
-```
-
-
+##Async Patterns
+**
 
