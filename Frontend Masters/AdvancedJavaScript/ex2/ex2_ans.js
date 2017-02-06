@@ -124,6 +124,8 @@ NotesManager.loadData(
 	]
 );
 
+// The reason for the function wrapper is because the $(document) ready takes in
+// a function to be loaded, o/w the init function would run right away before the DOM is loaded
 $(document).ready(function() {
 	NotesManager.init({
 		notes: "#notes"
