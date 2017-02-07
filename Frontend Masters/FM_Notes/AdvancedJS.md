@@ -303,6 +303,8 @@ var baz = new foo();
 
 * __Generators (as of ES6)__ The _Run to Completion Invariant_ is true of all normal functions, but NOT Generators
     - _syntax_ `function * gen() {} `
+    - When you call a generator function, it actually constructs an `iterator` to control the operation for the generator.
+    - tl;dr a `generator` can _pause_ itself, and an `iterator` can _resume_ it.
 
 ```javascript
 function* gen() {
@@ -314,4 +316,180 @@ function* gen() {
 var it = gen();
 it.next(); //prints "Hello"
 it.next(); //prints "World"
+```
 
+
+```javascript
+//Synchronous
+var run = coroutine(function*(){
+    var x = 1 + (yield null);
+    var y = 1 + (yield null);
+    yield (x + y);
+});
+
+run();
+run(10);
+console.log("Meaning of life: " + run(30).value);
+```
+
+
+```javascript
+//Asynchrounous
+function coroutine(f) {
+    var o = f(); // instantiate the coroutine
+    o.next(); // execute until the first yield
+    return function(x) {
+        o.next(x);
+    }
+}
+
+function getData(d) {
+    setTimeout(function(){ run(d); },1000 );
+}
+
+var run = coroutine(function*(){
+    var x = 1 + (yield getData(10));
+    var y = 1 + (yield getData(30));
+    var answer = (yield getData(
+        "Meaning of life: " + (x + y)
+    ));
+    console.log(answer);
+    // Meaning of life: 42
+});
+
+run();
+```
+
+
+##Promises
+* Promises are a way to subscribe to the completion of a task. For example, when a function is called, a promise will let you know when the function completes. 
+*  __Promises are a great way to un-invert the _Inversion of Control_ and bring the control back to us.__ 
+
+* How jQuery implements promises...
+```javascript
+var wait = jQuery.Deferred();
+var p = wait.promise();
+
+p.done(function(value){
+    console.log(value);
+});
+
+setTimeout(function(){
+    wait.resolve(Math.random());
+},1000);
+
+//Example 2
+function waitForN(n) {
+    var d = $.Deferred();
+    setTimeout(d.resolve,n);
+    return d.promise();
+};
+
+waitForN(1000)
+.then(function(){
+    console.log("Hello World");
+    return waitForN(2000);
+})
+.then(function(){
+    console.log("finally!")
+});
+
+//Example 3 - Async Patterns: Native Promise Tasks
+function getData(d) {
+    return new Promise(function(resolve,reject){
+        setTimeout(function(){ resolve(d); }, 1000);
+    });
+}
+
+var x;
+
+getData(10)
+.then(function(num1){
+    x = 1 + num1;
+    return getData(30);
+})
+.then(function(num2){
+    var y = 1 + num2;
+    return getData("Meaning of life: " + (x + y));
+})
+.then(function(answer){
+    console.log(answer);
+    //meaning of life: 42
+});
+```
+
+* __Asynquenece__ are asynchrounous sequences, where _Sequence_ = automatically chained promises.
+    - `.gate()` when two or more things happen at the same time, doesn't care when they finish or what order, it will wait until all of them are finished before moving on. _Waiting for everyone to get to the **gate**_
+
+```javascript
+// https://github.com/getify/asynquence
+ASQ()
+.then(function(done){
+    setTimeout(done,1000);
+})
+.gate(
+    function(done){
+        setTimeout(done,1000);
+    },
+    function(){
+        setTimeout(done,1000);
+    }
+)
+.then(function(){
+    console.log("2 seconds passed!");
+});
+
+
+// Example 2
+function getData(d) {
+    return ASQ(function(done){
+        setTimeout(function(){ done(d); },1000);
+    });
+}
+
+ASQ
+.waterfall( //waterfall does things in order, and keeps track of the messages
+    function(done){ getData(10).pipe(done); },
+    function(done){ getData(30).pipe(done); },
+)
+.seq(function(num1,num2){
+    var x = 1 + num1;
+    var y = 1 + num2;
+    return getData("Meaning of life: " + (x+y));
+})
+.val(function(answer){
+    console.log(answer);
+    // Meaning of life: 42
+});
+
+// Example 3: Generator + Sequence tasks
+function getData(d) {
+    return ASQ(function(done){
+        setTimeout(function(){ done(d); },1000);
+    });
+}
+
+ASQ()
+.runner(function*(){
+    var x = 1 + (yield getData(10));
+    var y = 1 + (yield getData(30));
+    var answer = yield (getData(
+        "Meaning of life: " + (x + y)
+    ));
+    return answer;
+})
+.val(function(answer){
+    console.log(answer);
+    // Meaning of life: 42
+});
+```
+
+###Async Patterns Recap
+1. __What is _callback hell_? Why do callbacks suffer from _inversion of control_?__ 
+Callback hell is inversion of control - it's handing the control to the rest of your program over to some utility and of the trust that that involves, and all the problem that it can introduce (i.e., lack of error-handling, re-tries etc.)
+2. __How do you pause a generator? How do you resume it?__ 
+You pause a generator with `yield()` and resume it with `next()` on it's iterator.
+3. __What is a promise? How does it solve inversion of control issues?__
+A promise is a continuation event, and solves the inversion of control issue bc when you give a continuation in, you receive a promise back; giving you back control over your program for step 2
+4. __How do we combine generators and promises for flow control?__
+It automatically listens for yielded out promises, and restarts the generator for when it completes.
