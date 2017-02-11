@@ -1,6 +1,15 @@
 #Introduction to React
 https://tylermcginnis.com/reactjs-tutorial-a-comprehensive-guide-to-building-apps-with-react/
 
+* Create React app with no build configs tl;dr:
+```
+npm install -g create-react-app
+
+create-react-app my-app
+cd my-app/
+npm start
+```
+
 ##React.js Fundamentals:
 * __Components__ are the building blocks of React (think widgets/modules), a collection of HTML, CSS< JS and some internal data specific to that component
     * Components are defined either in pure JS or can be defined in what React calls 'JSX'

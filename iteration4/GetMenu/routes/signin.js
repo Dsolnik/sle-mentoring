@@ -6,14 +6,16 @@ var bodyParser = require("body-parser");
 crypto = require("crypto");
 
 
-// router.post('/failure', function(req, res){
+router.post('/failure', function(req, res){
+  console.log("incorrect password");
+  res.end("Failed to login");
+})
 
-// })
+router.post('/success', function(req, res){
+    console.log('successfully logged in');
+    res.end("sucessfully logged in");
+})
 
-// router.post('/success', function(req, res){
-//   console.log("success");
-//   res.end("hi");
-// })
 
 
 // signin module
@@ -28,7 +30,7 @@ router.post('/signin', function(req, res) {
      //    console.log('Error! ', err);
      //    return;
      // }
-
+     debugger;
      var userdata = JSON.parse(data);
      var salt = userdata.salt;
      var hashToMatch = crypto.createHash('sha1').update(salt + userdata['password']).digest('hex');
@@ -39,11 +41,13 @@ router.post('/signin', function(req, res) {
     // ?? How can I redirect to /success & /failure?  
     if( hashToMatch == userdata['hash']) {
       // console.log("win");
-      console.log('successfully logged in');
-      res.end("sucessfully logged in");
+      // console.log('successfully logged in');
+      // res.end("sucessfully logged in");
+      res.redirect('/success');
     } else {
-      console.log("incorrect password");
-      res.end("Failed to login");
+      // console.log("incorrect password");
+      // res.end("Failed to login");
+      res.redirect('/failure');
     }
 
    });
