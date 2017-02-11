@@ -38,7 +38,17 @@ Now set a cookie upon successful authentication. So when someone signs into your
 8(Extra). Read up on https://github.com/expressjs/session -- sessions
 
 #Part 2:
-Finish up the FEM stuff and take notes here. Those videos are incredibly important.
+Finish up the FEM or REACT stuff and take notes here if incomplete. Those videos are incredibly important and do come down in the pipeline. Prefer REACT or FEM excess stuff.
+
+#Part 3:
+Networks:
+1. What is a private IP address?
+2. What is the loopback address?
+3. What are the 7 layers of the OSI model? (memorize this)
+4. What private IP address can you most likely expect your router to have?
+5. What is the difference between a public and a private IP address?
+6. Run $ipconfig -- get your own MAC address write it down here, then write down your IPv4 address and your IPv6 address
+
 
 
 #Part Feedback:
