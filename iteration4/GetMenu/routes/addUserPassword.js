@@ -16,17 +16,16 @@ router.post('/addUserPassword', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  // To ensure hash uniqueness - create hash of current timestamp + random number
-  var current_date = (new Date()).valueOf().toString();
-  var random = Math.random().toString();
+  // create salted hash with sha1 encryption
   var hash = crypto.createHash('sha1').update(salt + password).digest('hex');
 
   var hashedsalt = 
   {
+    username: username,
     password: password,
     salt: salt,
     hash: hash 
-  }
+  };
 
   // data = JSON.stringify(data);
   fs.appendFile('passwords.json', JSON.stringify(hashedsalt));
