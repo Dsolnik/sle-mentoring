@@ -55,10 +55,13 @@ Networks:
 In your answer files PLEASE write down:
 
 1. what was too hard for you specific steps:
+  * Getting started with MongoDB was pretty difficult for me. There were a lot of moving pieces/in-between steps that I wished were mentioned beforehand. 
 2. what was too easy for you: n/a
 3. What felt just right?:
+  * When Stevie walks me through a trivial example it's EXTREMELY beneficial to me. Especially when it's learning a new topic such as MongoDB. I wish there was more of these starting off each iteration. 
 4. Do you feel like you learned something substantial? Are you growing as an engineer? 
 5. Any other notes
+  * If you worked the assigned problems beforehand and have the solutions readily available, I think it'd be beneficial in helping you deliver/create a more fluid, thoughtful, and comprehensive lesson plan more - that and understand any potential problems or shortcomings I might run into. If there was an 'ideal' solution for me to look at and score against, I'd understand how proficient I am and if i'm on the right track. This would save a lot of time and frustration for the both of us in the long run. 
 6. A rating 1-10:
 7. did you use any other resources that you found particularly helpful? If so, list them .
 
