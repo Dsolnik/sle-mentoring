@@ -21,3 +21,6 @@ brief review
 
 ##Remember These:
 * The single most important factor in designing your application schema within MongoDB is to _match the data access patterns of your application_.
+* This data acccess pattern is not well supported by the blog schema? _Providing a table of contents by tag_
+
+
