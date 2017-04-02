@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Get Menu</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!--  if you put this line below body tag it bypasses the need for document.ready -->
+	<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+	<h2>Create Account</h3>
+	<form method="post" action="/addUserPassword">
+		<input id="usernameField" type="text" name="username" value="username">
+		<input id="passwordField" type="text" name="password" value="password">
+		<input type="submit">
+	</form>
+
+	<h2>Sign-in</h3>
+	<form method="post" action="/signin">
+		<input id="usernameSignin" type="text" name="usernameSignin" value="username">
+		<input id="passwordSignin" type="text" name="passwordSignin" value="password">
+		<input type="submit">
+	</form>
+
+	<h2>Enter a food</h2>
+
+	<form method="post" action="/addItem">
+	  <input type="text" name="itemName">
+	  <input type="text" name="Cost">
+	  <input type="submit">
+	</form>
+
+
+	<button type="button" class="button" id="menuButton">Get Menu</button>
+	<div id="result" style="color:red">HELLO</div>
+</body>
+</html>
+
+

@@ -35,7 +35,7 @@
 // --------------------- My Version Using jQuery ------------------------------
 $(function(){
   
-  url = "http://demo3354820.mockable.io/menu/sushi";
+  var url = "http://demo3354820.mockable.io/menu/sushi";
 
   let clickMenuModule = {
       getRequest: function(url){
@@ -43,6 +43,8 @@ $(function(){
             $.get(url, function(data){
               data = JSON.stringify(data);
               $("#result").html(data);
+           }).fail(function(){
+              console.log("Error! Get request incorrect");
            });
          }
       },

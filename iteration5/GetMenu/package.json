@@ -1,0 +1,9 @@
+{
+  "name": "getmenu-app",
+  "version": "1.0.0",
+  "description": "getmenu-app with mongodb",
+  "main": "app.js",
+  "dependencies": {
+    "mongodb": "~2.0"
+  }
+}
