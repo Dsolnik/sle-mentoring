@@ -34,9 +34,6 @@ You are limited to the following tools:
 * HTML
 
 No other tools are allowed.
-
-
-
 ---
 #Part 2: (Fundamentals of Javascript)
 Watch:
