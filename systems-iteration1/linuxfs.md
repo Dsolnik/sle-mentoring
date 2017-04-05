@@ -4,6 +4,7 @@ Were going to focus on the fundamentals needed to operate efficiently.
 __0. What are the 8 sections of the man pages? After this, attempt to use the man pages to  look up any commands I mention.__
 
 A (MAN)ual page is a descriptive help system that sometimes contains procedural help.
+    
     1. User Commands
     2. System Calls
     3. C Library Functions 
