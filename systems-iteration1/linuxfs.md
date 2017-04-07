@@ -63,7 +63,7 @@ __9. What is apt-get ? (Run this command and try it out)__
 
 __10. in the context of UNIX what do these characters mean? & (we used this):__
 
-    1. $
+    1. $: reference the terminal shell
     2. ~ : this corresponds to the $HOME internal variable, i.e., the home directory. 
     3. / : Filename path seperator; separates the components of a filename
     4. .. : two dots denotes the parent directory
