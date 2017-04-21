@@ -44,6 +44,7 @@
     4. Chef - A configuration automation tool that permit mass configuration changes on servers. Allows you to make changes to many servers at once.
     5. Ansible - Similar to Chef; designed for provisioning servers and actioning code deployments. 
 6. Last iteration we learned about CHMOD and what rwxrwxrwx means. Now rwx = 7. Why is that? How do each of these permissions (read, write, execute) correspond to an integer?
+    - `rwxrwxrwx` for each `rwx` it corresponds to a specific user; in order they are: __user__, __group__, __other__
     - CHMOD has it s.t., read = 4, write = 2, execute = 1. All other numbers are only sums of the 3 mentioned; so only 4 numerals, 0751, exist:
         - 0 = nothing special
         - 7 = user can read, write, execute
