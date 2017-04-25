@@ -9,6 +9,9 @@ Make your script run on a routinely basis i.e. every 5 seconds first. You should
 
 ##Some more C
 Read: [How linux creates processes](https://brandonwamboldt.ca/how-linux-creates-processes-1528/)
+Read: [Streams] (https://github.com/substack/stream-handbook)
+Read the Node Streams library
+
 As you read this, copy down the C code and attempt to comment each line of code.
 
 ##What are some tasks that meeter needs to achieve?
