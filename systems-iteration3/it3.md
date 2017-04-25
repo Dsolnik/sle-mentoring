@@ -1,4 +1,4 @@
-##Part One
+## Part One
 
 Write some code in C. You should be able to do this pretty much anywhere and everywhere.
 
@@ -10,7 +10,7 @@ When you're done we're gonna answer your question about the ampersand, &. The wa
     * when you run `ls`, a child bash is cloned off of the original, creating two _SEPERATE_ instances of bash shells, and then the cloned child bash is replaced with the executable `ls`
 
 
-##Part Two
+## Part Two
 Next we're going to scale out your skills on the systems that RELATES to your MeeteR work. Go write a Node, Bash, or Python script that can backup files -- specifically transfer some file on your local system to S3 on AWS. You'll likely use this if meeter scales out. Note that S3 is probably  one of the cheapest backup solutions. You can pick your poison on the language, though I suggest Bash or Node just because it'lll be most short term relatable.
   - refer to `aws_s3_fileupload.js`
 
