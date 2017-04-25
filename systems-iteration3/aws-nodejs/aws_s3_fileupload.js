@@ -2,7 +2,7 @@ var AWS = require('aws-sdk'),
     fs = require('fs');
 
 // For dev purposes only
-AWS.config.update({ accessKeyId: 'AKIAJ6YP3U6QR2A4KQNQ', secretAccessKey: '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' });
+AWS.config.update({ accessKeyId: '...', secretAccessKey: '...' });
 
 // Read in the file, convert it to base64, store to S3
 fs.readFile('test.txt', function (err, data) {
