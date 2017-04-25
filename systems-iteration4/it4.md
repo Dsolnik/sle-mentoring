@@ -1,5 +1,8 @@
 ##Backups Expanded
+First check that your script works by downloading your text file.
+
 Last iteration we wrote a backup script. Though its possible that we can use this backup script whenever we need to backup our machines, its more likely that we'll have to back up on a routinely basis. 
+
 
 Make your script run on a routinely basis i.e. every 5 seconds first. You should be using the `cron` software utility to do this: https://en.wikipedia.org/wiki/Cron
 
