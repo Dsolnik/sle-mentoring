@@ -37,7 +37,7 @@ Write em here so i can line them up correctly with better learning.
 # in desc. priority
 - optimize/refactor mongoDB schemas
 - CSS of web app (lols)
-- 
+- Ansible/Chef/Docker?...
 - migrate away from Parse (eventually)
 
 ## My questions for Stevie:
