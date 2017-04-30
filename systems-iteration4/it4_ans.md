@@ -6,7 +6,10 @@
 
 ## Explain what happens ..
 1. when you run $ls via system calls in bash. 
+  - when you run `$ls` in bash, it forks the bash shell and replaces the cloned child with `ls` and executes 
+
 2. when you run $node & via system calls in bash.
+  - when you run `$node&` in bash, the shell executes the command in the background in a subshell. the shell doesn't wait for the command to finish, and the return status is 0. 
 
 ## Some more C
 Read: [How linux creates processes](https://brandonwamboldt.ca/how-linux-creates-processes-1528/)
