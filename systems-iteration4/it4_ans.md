@@ -31,10 +31,11 @@ Read the Node Streams library
 
 As you read this, copy down the C code and attempt to comment each line of code.
 
-##What are some tasks that meeter needs to achieve?
+## What are some tasks that meeter needs to achieve?
 Write em here so i can line them up correctly with better learning.
 
 # in desc. priority
+- Parse Server Image issue: http://stackoverflow.com/questions/43726981/parse-server-cant-access-images
 - optimize/refactor mongoDB schemas
 - CSS of web app (lols)
 - Ansible/Chef/Docker?...
