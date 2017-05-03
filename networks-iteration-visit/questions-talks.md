@@ -3,4 +3,5 @@ Talk to me about DNS.
 Talk to me about virtual environments.
 Talk to me about databases
 Talk to me about distributed systems
+Talk to me about DHCP
 
