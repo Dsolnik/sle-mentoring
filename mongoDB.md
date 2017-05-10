@@ -203,5 +203,16 @@ to create a cursor with a shell, assign the results of a query on a collection t
   ...     db.collection.insert({x: i});
   ...   }
   > var cursor = db.collection.find();
-  
+  ```
+
+## Limits, Skips and Sorts 
+The most common query options are limiting the number of results returned, skipping a number of results, and sorting. All these options must be added before a query is sent to the database. 
+
+* `limit`: `db.c.find().limit(n)` sets an upper limit, of documents to be returned.
+* `skip`: `db.c.find().skip(n)` this will skip the first n matching documents and return the rest of the matches. 
+* `sort`: `db.c.find().sort({username: 1, age: -1})` takes an object: a set of key/value pairs where the keys are key names and the values are the sort direction. If multiple keys are given, the results will be sorted in that order.
+
+These 3 methods cam be combined - often handy for pagination. For example, you want 50 results per page, sorted by price, from high to low, you'd do the following: `db.stock.find({"desc": food}).limit(50).sort({"price": -1})`
+
+
   
