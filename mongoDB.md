@@ -215,4 +215,8 @@ The most common query options are limiting the number of results returned, skipp
 These 3 methods cam be combined - often handy for pagination. For example, you want 50 results per page, sorted by price, from high to low, you'd do the following: `db.stock.find({"desc": food}).limit(50).sort({"price": -1})`
 
 
-  
+# Chapter 5 - Indexing
+
+## Introduction to Indexing
+* A query that doesn't use an index is called a _table scan_, which means that the server has to "look through the whole book" to find a query's results.
+* Use `explain()` to see what MongoDB is doing when it executes the query; prints out a summary statistic of the query
