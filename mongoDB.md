@@ -218,5 +218,78 @@ These 3 methods cam be combined - often handy for pagination. For example, you w
 # Chapter 5 - Indexing
 
 ## Introduction to Indexing
-* A query that doesn't use an index is called a _table scan_, which means that the server has to "look through the whole book" to find a query's results.
-* Use `explain()` to see what MongoDB is doing when it executes the query; prints out a summary statistic of the query
+A query that doesn't use an index is called a _table scan_, which means that the server has to "look through the whole book" to find a query's results - very computationaly expensive. Indexes are a greay way to fix queries like this because they organize data by a given field to let MongoDB find it quickly. 
+
+* Downside to Indexes: every write that touches an indexed field (insert, update, or delete) will take longer for every index you have. 
+* __PRO TIP__: To choose which fields to create indexes for, look through your common queries and queries that need to be fast and try to find a common set of keys from those. 
+* Use `explain()` to see what MongoDB is doing when it executes the query; prints out a summary statistic of the query with keys such as `nscanned` and `millis`(time). __You should always run `explain()` on _exactly_ the queries that your app is running.__
+
+## Introduction to Compound Indexes
+* A _compound index_ is an index on more than one field: `db.users.ensureIndex({"age" : 1, "username" : 1})`. 
+* In general, if MongoDB uses an index for a query it will return the resulting documents in an index order
+* Three most common ways MongoDB uses indexes:
+
+    1. __Point Query__: `db.users.find({"age" : 21}).sort({"username" : -1})` a _point query_ searches for a single value (although there might be multiple documents with that value). Due to the second field in the index, the results are already in the correct order for the sort: MongoDB can start with the last match of `{"age" : 21}` and traverse the index in order. 
+      
+     
+    Point Queries are very efficient: MongoDB can jump directly to the correct age and doesn't need to sort the results as traversing the index returns the data in the correct order.
+
+    2. __Multi-value Query__: `db.users.find({"age" : {"$gte" : 21, "$lte" : 30}})` looks for documents matching multiple values.
+    
+    3. __Multi-value Query w/ Sort__: 
+        * __BAD__:`db.users.find({"age" : {"$gte" : 21, "$lte" : 30}}).sort({"username" : 1})`. With this query, MongoDB has to sort the results in memory before returning them resulting in a suboptimal query. 
+        * __BEST__: `db.users.find({"age" : {"$gte" : 21, "$lte" : 30}}).sort({"username" : 1}).hint({"username": 1, "age" : 1})`. by using `hint()` it forces the query optimizer to use a specific index to fulfill the query, so it doesn't have to do an in-memory sort.
+        
+## Indexing Objects and Arrays
+MongoDB allows you to reach into your documents and create indexes on nested fields and arrays, which behave similary to "normal" index fields
+
+### Indexing Embedded docs
+Indexes can be created on keys in embedded documents. 
+
+```
+{
+  "username" : "sid",
+  "loc" : {
+      "ip" : "1.2.3.4",
+      "city" : "Springfield",
+      "state" : "NY"
+   }
+ }
+```
+
+
+We can put an index on one of the subfields of `"loc"`, say `"loc.city"` to speed up queries using that field: `db.users.ensureIndex({"loc.city" : 1})`
+
+## Index Cardinality
+_Cardinality_ refers to how many distinct values there are for a field in a collection. In general, __the greater the cardinality of a field, the more helpful an index on that field can be__. As a rule of thumb, create indexes on high-cardinality keys or at least put high-cardinality keys first in compound indexes before low-cardinality keys.
+
+## When not to Index
+Indexes often work well for | Table scans often work well for
+------------ | -------------
+Large Collections | Small Colllections
+Large Documents | Small Documents
+Selective Queries | Non-Selective Queries
+
+## Types of Indexes
+
+* __Unique Indexes__: guarantee that each value appear at most once. The `"_id" key is a unique index that is automatically created whenever you create a collection. 
+    * _Compound unique indexes_: individual keys can have the same values, but the combination of values across all keys in an index entry can appear in the index at most once. GridFS uses this method for storing large files with a unique index on . {"files_id" : 1, "n" : 1}
+    * _Dropping duplicates_: if you attempt to build a unique index on an existing collection, it will failt to build if there are any duplicate values. You can also use the `dropDups` option which will save the first document and remove any subsquent documents with duplicate values. __WARNING__ only use if your data isn't important
+        * i.e., `> db.people.ensureIndex({"username" : 1}, {"unique" : true, "dropDups" : true})
+* __Sparse Indexes__: unique indexes count `null` as a value, so you cannot have a unique index with more than one document missing the key. However, there are plenty of cases where you may want the unique index to be enforced only if the key exists. If you have a field that may or may not exist, but must be unique when it does, you can combine the unique option with the `"sparce": true` option. 
+
+
+## Index Administration
+All of the information about a db's indexes are stored in the _system.indexes_ collection. This collection is reserved, so you cannot remove or modify the documents. 
+
+* Identifying indexes: you can name your indexes with the `name` option: `> db.foo.ensureIndex({..., {"name" : "indexName"})`
+* Changing Indexes: you can drop indexes using the `dropIndex` command: `> db.people.dropIndex("indexName")
+
+
+
+# Questions for Stevie:
+
+1. When would you want to Index an Array? Since Indexes on array elements do not keep any notion of position, what's the point if you can't get the top or bottom of that array with an index? (pg. 97)
+2. 
+
+    
