@@ -283,13 +283,59 @@ Selective Queries | Non-Selective Queries
 All of the information about a db's indexes are stored in the _system.indexes_ collection. This collection is reserved, so you cannot remove or modify the documents. 
 
 * Identifying indexes: you can name your indexes with the `name` option: `> db.foo.ensureIndex({..., {"name" : "indexName"})`
-* Changing Indexes: you can drop indexes using the `dropIndex` command: `> db.people.dropIndex("indexName")
+* Changing Indexes: you can drop indexes using the `dropIndex` command: `> db.people.dropIndex("indexName")`
+
+# Chapter 6 - Special Index & Collection Types
+
+## Capped Collections
+Capped collections  are fixed in size. When we try to insert a capped collection that is already full, the oldest document will be deleted, and the new one will take it's place. Certain operations aren't allowed on capped collection, they are: documents cannot be removed, deleted, and updates that cause documents to grow in size aren't allowed. Use cases for Capped collections could be: text message deletion upon reaching max memory, Snapchat's cache overflow etc
+
+* You can create a capped collection specifying a fixed size, as well as a limit of # of documents:
+```
+  > db.createCollection("my_collection",
+  ... {"capped": true, size: 100000, "max" : 100});
+  { "ok" : true }
+```
+
+* once a capped collection has been created it cannot be changed (it must be dropped or recreated if you wish to change it's properties)
+* you can also create a capped collection by converting an existing regular collection using the `"convertToCapped"` option: 
+`> db.runCommand({"convertToCapped" : "test", "size" : 10000});`
+
+* __documents in a capped collection are always kept in insertion order__ so, where natural sorts normally wouldn't be beneficial on a normal collection that can change document positions, it would work exceptionally on a capped collection - giving you sorts from newest to oldest: `> db.my_collection.find().sort({"$natural" : -1})`
+
+## Time-to-Live (TTL) Indexes 
+TTL indexes allow you to set a timeout for each document, where after the document reaches a preconfigured age it will be deleted. This type of index is useful for caching problems like session storage. Example: `> db.foo.ensureIndex({"lastUpdated" : 1}, {"expireAfterSeconds" : 60*24*24})`
+
+## Full-Text Indexes
+Full-text indexes give you the ability to search text quickly, as well as provide built-in support for multi-language stemming and stop words. 
+
+* __WARNING__: Creating a full-text index on a busy collection can overload MongoDB, so adding this type of index should always be done offline, or at a time when performance doesn't matter. 
+* only one full text index is allowed per collection 
+* by default MongoDB queries for an OR of all words
+* you can optimize full-text searches using prefix and postfix criteria with the full-text fields to narrow your search results down before indexing: `> db.blog.ensureIndex({"data" : 1, "post" : "text", "author" : 1})`
+ 
+## Storing files with GridFS
+GridFS is a mechanism for storing large binary files in MongoDB, and is best when you have large files you'll be accessing in a sequential fashion that won't be changing much. 
+
+__PROS__:
+* Using GridFS can simplify your stack. If you're already using MongoDB, you might be able to use GridFS instead of a separate tool for file storage
+* GridFS is easier for failover and scaling-out, since it leverages any existing replication or autosharding that you've set up for MongoDB.
+
+__CONS__: 
+* slower performance: accessing files from MongoDB will not be as fast s going directly through the filesystem
+* you can only modify documents by deleting them and resaving the whole thing. 
+
+You can use the `mongofiles` utility (included w/ MongoDB distributions)to upload, download, list, search for, or delete files in GridFS.
+
+
+
+
+
+
 
 
 
 # Questions for Stevie:
 
 1. When would you want to Index an Array? Since Indexes on array elements do not keep any notion of position, what's the point if you can't get the top or bottom of that array with an index? (pg. 97)
-2. 
 
-    
