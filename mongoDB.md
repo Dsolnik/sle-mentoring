@@ -164,3 +164,44 @@ Multiupdates are a great way of performing schema migrations or rolling out new 
   ... {"$set" : {"gift" : "Happy Bday!"}}, false, true)
   ```
  
+# Chapter 4 - Querying
+
+## Introduction to `find()` 
+the `find()` method is used to perform queries in MongoDB. Querying returns a subset of documents in a collection.
+
+* Sometimes you don't need all the key/value pairs in a document returned. If this is the case, you can pass a second argument to `find()` specifying the keys you want
+    * i.e., `db.users.find({}, {"username" : 1, "email": 1})` returns just the key/values for username and email for every document in the users collection
+        - you can exclude specific key/value pairs from the results of a query by setting the value of the 2nd parameter key/value pair to `0`
+* _Limitations_:
+    * the value of a query document must be constant as far as the database is concerned. You can make it a normal variable in your own code. 
+
+
+## Query Criteria 
+
+* `"$lt"`, `"$lte"`, `"$gt"`, `"$gte"` are the basic conditionals of a query
+* `"$in"`, `"$or"`, `"$nin"` are __OR__ queries, used for a variety of values for a single key
+* `"$not"` can be applied on top of any other criteria to negate the return values
+* Multiple conditions can be put on a single key. 
+* `"$and"`, `"$or"`, `"$nor"` are the few 'meta-operators' that go in the outer document 
+    - i.e., `db.users.find({"$and" : [{"x" : {"lt" : 1}}, {"x" : 4}]})`
+
+## `"$where"` Queries
+__`"$where"` should not be used unless strictly necessary.__ For queries that cannot be done any other way, the `"$where"` clause allows you to execute arbitrary JS as part of your query. You should only use `"$where"` only when there is no other way of doing the query.
+
+## Server-side Scripting
+Server-side JS is susceptible to injection attacks similar to those that occur in a relationalDB. By following certain riles around accepting input, you can use use JS safely:
+* turn off JS execution altogether by running mongod with the `--noscripting` option
+* make sure you aren't accepting user input and passing it directly to mongod
+
+## Cursors
+the database returns results from `find()` using a _cursor_. WIth cursors you can limit, skip, or sort results in any combinations in any direction and perform a number of other powerful operations. 
+
+to create a cursor with a shell, assign the results of a query on a collection to a local variable. 
+* example: 
+  ```
+  > for(i=0; i<100; i++) {
+  ...     db.collection.insert({x: i});
+  ...   }
+  > var cursor = db.collection.find();
+  
+  
