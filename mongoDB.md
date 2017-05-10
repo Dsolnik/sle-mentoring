@@ -85,5 +85,82 @@ If you have frequently-loaded scripts you might want to put them in your `mongor
     * MAKE SURE that, if you change any db functions you do so on both the db variable and the DB prototype.
     * If done correctly, if you try to call any of these functions, it will print an error message.
     * you can disable your `.mongorc.js` by using the `--norc` flag when starting the shell
+
+# Chapter 3 - Creating, Updating, and Deleting Documents 
+
+## Inserting & Saving Documents
+
+### Bulk Insert
+if you have a situation where you are inserting multiple documents into a collection, you can make the insert faster by using _batch_ inserts: `db.foo.batchInsert()`
+
+* batch inserts are only useful if you are inserting multiple documents into a single collection. You cannot use batch inserts to insert into multiple collectioins with a single request.
+* __Warning__: Current versions of MongoDB do not accept messages longer than 48 MB. If you attempt to insert more than 48MB, many drivers will split up the batch insert into multiple 48MB batch inserts.
+
+### Insert Validation
+MongoDB does minimal checks on data being inserted. Some checks are:
+* does the `_id` field exist, if not add one
+* document size has to be < 16MB
+
+## Removing Documents
+
+* `db.foo.remove()` will remove all documents in the _foo_ collection
+    * you can specifiy parameters as to which documents should be removed: `db.mailing.list.remove({"email" : true})`
+* if you want to clear an entire collection , it is faster to `db.foo.drop()` than to `remove()` document-by-document. It is vastly faster, but if a whole collection is dropped, all its metadata is deleted with is.
+
+### Document Replacement 
+
+* the simplest type of update replaces a matching document with a new one. __This can be useful to do a dramatic schema migration.__
+* __REMEMBER__ to use best practice, and replace a _unique_ document by a key like `_id`. 
+    - this is why `db.people.update({"name": "joe"}, joe})` doesn't work and `db.people.update({"_id": ObjectID("...")}, joe)` works.
+
+## Using Modifiers 
+Usually only certain portions of a document need to be updated. You can update specific fields in a document using atomic _update modifiers_.
+
+* __Update Modifiers__ are special keys that can be used to specify complex update operations.
+
+
+### Updating or Setting the value within an existing Document
+`"$set"` modifier updates or sets the value of a field. A user can use `"$set"` to:
+  - add a new field that has not yet been created
+  - change the value of a key-value pair within a document
+  - change the value-type of a key-value pair
+  - reach in and change embedded documents
+  - remove the key altogether using `"$unset"`
+
+### Incrementing++ and Decrementing--
+the `"$inc"` `"$decr"` and  modifier can be used to change the value for an existing key or to create a new key, and is useful for anything that has a changeable, numeric value. `"$inc"` is similar to `"$set"`, but it is designed for incrementing and decrementing numbers only.  
+
+* ex: we want to keep a running counter for each time someone visited a page. We can use the `"$inc"` modifier to incr. the value of the `"pageviews"` key. 
+    ```
+    > db.analytics.update({"url" : "www.example.com"}, 
+    ... {"$inc" : {"pageviews" : 1}})
+    ```
+
+### Array Modifiers
+
+* `"$push"` adds elements to the end of an erray if it exists and creates a new array if it doesn't. 
+    * `"$slice"` in conjunction with `"$push"` prevents an array from growing beyond a certain size, effectively making a "top N" list of items.
+* `"$each"` allows you to push multiple values in one operation  
+* `"$sort"` allows you to sort the array in desc. (-1) or asc. (1) order
+* _Note_: you can't just `"$slice"` or `"$sort"` an array with `"$push"`. You need to include `"$each"`    
+
+* Using Arrays as sets, where all values in a set are unique - only adding values if they are not present. 
+    - To push a value onto an existing array, only if that value DNE, you use the `"$ne"` modeifier in the query document
+    ```
+    > db.papers.update({"authors cited" : {`"$ne"` : "Ritchie"}}, 
+    ... {$push : {"authors cited" : "Richie"}}) 
+    ```
+* to remove elements from an array:
+    - use `"$pop"` to remove elements from either end, 1 for end of array, -1 for beginning
+    - use `"$pull"` to remove elements of an array that match the given criteria
     
-    
+## Updating Multiple Documents
+Updates, by default, update only the 1st document found that matches the criteria. To modify all of the documents matching the criteria, you can pass `true` as the fourth parameter to update.
+
+Multiupdates are a great way of performing schema migrations or rolling out new features to certain users. Fore xample we can give a gift to every user who has a bday on a certain day :
+
+  ```
+  > db.users.update({"birthday" : "10/13/2017"},
+  ... {"$set" : {"gift" : "Happy Bday!"}}, false, true)
+  ```
+ 
