@@ -625,11 +625,31 @@ If you're on a budget, consider getting a secondary serer that is strictly for d
 * `"votes"` : 0; oif you have 2 machines, set the votes on this secondary to 0 so that the primary can stay primary if this machine goes down. 
 
 
+# Chapter 13 - Intro to Sharding 
+
+* __Sharding__ refers to the process of splitting data up across machines
+* __Manual Sharding__ is when an app maintains connections to several different db servers, each of which are independent
+
+The idea behind sharding is that by putting a subset of data on each machine, it becomes possible to store more data and handle more load w/o requiring mlarger or more powerful machines, just a larger quantity of less-powerful machines.
+
+Sharding is the most difficult and complex way of configuring MongoDB.
+
+## Understanding the Components of a Cluster
+MongoDB's sharding allows you to create a cluster of many machines (shards) and break up your collection amongst them, putting a subset of data on each shard. 
+
+One of the goals of sharding is to make a cluster of _n_ machines look like a single machine to your app. To hide the details from the app, we run a routing process called `mongos` in front of the shard. This router keeps a "table of contents" that tells the app which shard contains which data. The app connects to this router and issue requests normally. As far as the app knows, it's connected tp a stand-alone `mongod`.
+
+__NOTE__: The difference between replication and sharding: replication creates an exact copy of your data on multiple servers, so every server is a mirror-image of every other server. Whereas with sharding, every shard contains a different subset of data.
+
+... Return to Sharding when needed...
+
+* 
+
+
 # Items to address/optimize within my db
 1. Followers collections; folowee to have an array of followers in separate collection
 2. partition into separate databases: Event, User, logs, activities etc
 3. Replica Sets; their architectures, configurations - permissions to read from secondaries?
-
 
 
 
