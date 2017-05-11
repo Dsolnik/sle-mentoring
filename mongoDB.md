@@ -458,15 +458,177 @@ Up to now we've been using a _standalone_ server, a single _mongod_ server. It's
 **_Replication_ is a way of keeping identical copies of your data on multiple servers and is recommended for _all_ production deployments. Replication keeps your app running and your data safe, even if something happens to one or more of your servers.** 
 
 
+__Things to be aware of in a Replica Set__
+* the former terms are old language, so you can think of  _master_ == _primary_ and _slave_ == _secondary_
+* clients can send a primary all the same operations they could send a standalone server (r/w, commands, index builds etc.)
+* the secondary will only perform writes that it gets through replication, __NOT__ from clients
+* secondary does not accept write, unless it is the primaryDB using `secondaryDB.isMaster()`
 
 
+## Configuring a Replica Set 
+For actual deployments you'll need to set up replication across multiple machines. 
 
+1. __Name your set__: choose a name for your set, any string will do.
+2. __Init First Server__: restart server-1 with the `--replSet _name_` option: 
+    * i.e., `$mongod --replSet replName -f mongod.conf --fork`
+3. __Init subsequent Servers__: start up two more _mongod_ servers with the `replSet` option and the same identifier (replName). These will be the other members of the Replica set.
+```
+$ ssh server-2
+server-2$ $mongod --replSet replName -f mongod.conf --fork
+server-2$ exit
+$
+$ ssh server-3
+server-3$ $mongod --replSet replName -f mongod.conf --fork
+server-3$ exit
+```
+_Note_: each of the other member should have an empty data directory, even if the first member had data. They'll automatically clone the first member's data to their machines once they've been added to the set. 
+
+4. __Add to `mongod.conf` file__: for each member, add the `replSet` option in their `mongod.conf` file so that it will be used on startup from now on
+5. __Connect members to primary server__: create a configuration that lists each of the members and send this configuration to the primary server. In the shell of the primary, create a document that looks like this:
+```
+> config = {
+    "id" : "replName",
+    "members" : [
+        {"_id" : 0, "host" : "server-1:27017},
+        {"_id" : 1, "host" : "server-2:27017},
+        {"_id" : 2, "host" : "server-3:27017},
+    ]
+}
+```
+
+* `"_id": name of the replica set that was created. __make sure this is exact__
+* `"members"`: array of members in the replcia set. Each of these has a unique id and a hostname (can replace host names with whatever you want to call your servers)
+
+This `config` object is your replica set configuration, so now we have to send it to a member of the set. So let's connect to the server with data on it (primary server : server-1:27017) and init the set with this configuration.
+
+```
+> // connect to server-1
+> db = (new Mongo("server-1:27017")).getDB("test")
+> 
+> // init replica set
+> rs.initiate(config)
+{
+    "info" : "Config now saved locally. Should come online in about a minute.",
+    "ok" : 1
+ }
+ ```
+ 
+ __Take Aways__
+ * If you're starting a brand-new set, you can send the config to any member in the set
+ * __If you are starting with data on one of the members__, you must send the configuration to the member with data.
+ * You cannot initiate a repl set with data on more than one member. 
+
+
+## Replication (rs) Helper Functions
+`rs` is a global variable that contains replication helper functions. You can run `rs.help()` to see the helpers
+
+
+### Network Considerations
+every member of a set must be able to make connections to every other member of itself including itself. _If you get an error_ you might have to change your network configuration to allow connections between them. 
+
+### Changing Your Replica Set Configuration
+replica set configurations can be changed at any time: members can be added, removed, or modified
+
+* `rs.add()` and `rs.remove()` adds and removes a member to the set respectively
+* `rs.reconfig(config)` modifies existing members by passing in a new config file
+
+### How to Design a Set
+The most important concept is that replica sets are all about majorities (__majority__ defined here as _more than half of all members in the set_):
+1. you need a majority of members to elect a primary
+2. a primary can only stay primary so long as it can reach a majority
+3. a write is safe when it's been replicated to a majority.
+
+__Recommended Configurations__
+1. A majority of the set in on data center. This is a good design if you have a primary ata center where you alway want your replica set's primary to be located. 
+2. An equal number of serers in each data center, _plus_ a tie-breaking server in a third location. This is a good design if your data centers are "equal" in preference, since generally servers from either data center will be able to see a majority of the set. 
+
+# Chapter 11 - Connecting to a Replica Set from your App
+
+
+## Client-to-Replica-Set Connection Behavior
+From an app POV, a replica set behaves much like a standalone server. Your app performs r/w as though it were talking to a standalone while your replica set quietly keeps hot stanbys ready in the background.
+
+Connections to a replica set are similar to a connection to a single server. Use the `MongoClient` equivalent in your driver and provide a list of __seeds__, members of the replica set) for the driver to connect to. A connection string looks something like this:
+
+    "mongod://server-1:27017,server-2:27017"
+    
+When a primary goes down, the driver with automatically find the new primary (once elected) and will route requests to it as soon as possible. 
+
+__Caveats__
+* if there no reachable primary, your app will be unable to perform writes
+* you can opt that the secondaries be used for read requests until a primary is chosen
+
+## Waiting for Replications on Writes
+To ensure that writes will be persisted no matter what happens to the set, you must ensure that the write propogates to a majority of the members of the set.
+
+
+# Chapter 12 - Administration
+
+## Starting Members in Standalone Mode
+A lot of maintenance tasks cannot be performed on secondaries (bc of writes) and shouldn't be performed on primaries. Thus, we start up a server in _standalone mode_ - meaning restarting the member so that it is a standalone server, not a member of a replica set (temporarily) 
+
+First look at cmd line args: `> db.serverCmdLineOpts()`
+
+To perform maintenance on this server we can restart it without the `replSet` option. We also don't want the other servers in the set to be able to contact it, so we'll make it listen on a different port.
+
+    `$ mongod --port 30000 --dbpath /var/lib/db`
+
+When we have finished performing maintenance on the server, we can shut it down and restart it with its original options. It'll automatically sync up with the rest of the set, replicating any operations that it missed while it was "away".
+
+## Replica Set Configuration
+Replica set configuration is always kept in a document in the _local.system.replset_ collection. __Never__ update this document using _update_. __Always__ use an `rs` helper or the `replSetReconfig` command. 
+
+* You should always pass a config object to `rs.initiate()`.
+* You only call `rs.initiate` on one member of the set. that member receives the initiate and will pass the configuration on to the other members. 
+
+
+## Monitoring Replication 
+It is important to monitor the status of a set to see: what states they are in and how up-to-date the replication is. 
+
+Often issues with replication are transient: a server could not reach another server but now it can. The easiest way to see issues like this is to look at the logs.  **Make sure** you know where the logs are being stored (and that they _are_ being stored), and that you can access them. 
+
+### Getting the status
+One of the most useful commands you can run is `replSetGetStatus` or the `rs` equivalent `> rs.status()`, which returns the current information about every member of the set. 
+
+__useful fields from `rs.status()`__:
+* `syncingTo`: the member from which the set is is replicating from
+* `self`: this field is only present in the member `rs.status` was rnu on
+* `stateStr`: a string describing the state of the server
+* `uptime`: the number of seconds a member has been reachable
+* `optimeDate`: the last optime in each member's oplog
+* `lastHeartBeat`: the time this server last received a heartbeat from the member
+* `pingMs`: the running avg of how long heartbeats to this server have taken
+
+
+## Visualizing the Replication Graph
+By running the `replSetGetStatus` command on each member of the set, you can figure out the replication graph. 
+
+    > server1.adminCommand({replSetGetStatus: 1})['syncingTo']
+    server0:27017
+
+MongoDB determines who to sync to based on ping time. However there are some downsides to automatic replication chaining: more hops means that it takes a big longer to replciate writes to all servers. You can change the replication source by running the command:
+
+    > secondary.adminCommand({"replSetSyncFrom" : "server0:27017"}_
+    
+To validate that it switched sync sources correctly, you can run `rs.status()` and you should see that the `syncingTo` field is now changed respectively. 
+
+
+## Disable Chaining
+Chaining is when a secondary syncs from another secondary (instead of a primary). You can disable chaining, forcing everyone to sync from the primary, by changing the `"allowChaining"` setting to false.
+
+
+## Replication on a budget 
+If you're on a budget, consider getting a secondary serer that is strictly for disaster recovery with less RAM, CPU, slower I/O, etc. The good server will always be your primary and the cheaper server will never handle any client traffic. Here are the options to set for the cheaper box:
+* `"priority"`: 0; you do not want this server to ever become primary
+* `"hidden"` : true; you do not want clients ever sending reads to this secondary
+* `"buildIndexes"` : false; optional, but it can decrease the load this server has to handle considerably
+* `"votes"` : 0; oif you have 2 machines, set the votes on this secondary to 0 so that the primary can stay primary if this machine goes down. 
 
 
 # Items to address/optimize within my db
 1. Followers collections; folowee to have an array of followers in separate collection
 2. partition into separate databases: Event, User, logs, activities etc
-3. 
+3. Replica Sets; their architectures, configurations - permissions to read from secondaries?
 
 
 
