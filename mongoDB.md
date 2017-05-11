@@ -328,12 +328,59 @@ __CONS__:
 You can use the `mongofiles` utility (included w/ MongoDB distributions)to upload, download, list, search for, or delete files in GridFS.
 
 
+# Chapter 7 - Aggregation 
+The aggregation framework lets you transform and combine documents in a collection. THrough this we can build pipelines that process a stream of documents through several building blocls: filtering, projecting, grouping, sorting, limiting and skipping. 
 
+### Pipeline Operations
+Each operator receives a stream of documents, doe some type of transformation on these docs, and then passes on the results of the transformation. If it's the last one then the results are returned to the client.
 
+__Common Pipeline Operators__: 
+* __`$match`__: `{$match : {"state" : "VA"}}`; subsets documents
+    * __BEST PRACTICE__: use `$match` expressions as early as possible in the pipeline, so it filters put unneeded documents quickly and the query can use indexes if it is run before any projections or groupings
+* __`$project`__: allows you to extract fields from subdocuments, rename fields, and perform operations on them. Here are some common expressions you would use alongside with `$project`L
+    * __renaming__
+    ```
+    > db.users.aggregate({"$project" : {"userId": "$_id", "_id": 0}})
+    {
+        result" : {"userId" : ObjectId("...")}
+    }
+    ```
+    _note_: you must exclude `"_id"` to prevent it from returning alongisde `"userId"`.
+    * __mathematical expressions__
+    ```
+    > db.users.aggregate(
+    ... {
+    ...     "$project" : {
+    ...         "totalPay" : {
+    ...             "$add" : ["$add" : ["$salary", "$bonus"]
+    ...          }
+    ...      }
+    ... }) 
+    ```
+    * __logical expressions__
+        * `"$cmp" : [expr1, expr2]`; compare two expressions if they're equal.
+        * `"$cond" : [booleanExpr, trueExpr, FalseExpr]; equivalent of an `ifelse()`
+        
+* __`$group`__: `{"$group" : {"\_id": "$day"}}` allows you to group documents based on certain fields and combine their values. from here we can apply several grouping operators:
+```
+> db.sales.aggregate(
+... {
+...     "$group" : {
+...         "_id" : "$country",
+...         "averageRevenue" : {"$avg" : "$revenue"},
+...         "numSales" : {"$sum" : 1},
+...         "highestSales" : {"$max" : "$revenue"},
+...         "lowestSales" : {"$min" : "$revenue")
+...      }
+... }) 
+```
+* __`$unwind`__: `> db.blog.aggregate({"$unwind" : "$comments"})`. Unwinding turns each field of an array into a separate document. This is useful when you want to return certain subdocuments from a query - you'd `"$unwind"` the subdocs and then `"$match"` the ones you want. 
+* __`$sort`__,  __`$limit`__,  __`$skip`__ are all trivial
 
+__ Advice on Pipelines__
+Attempt to filter out as many documents (as well as fields) as possible at the beginninng of your pipeline before hitting any `"$project"`, `"$group"`, or `"$unwind"` operations. MongoDB won't allow a single aggregation to use more than a fraction of the system's memory and will error out if it is the case. If you can reduce the result set size with a selective `"$match"`, you can use the pipeline for real-time aggregations :smiley:
 
-
-
+### MapReduce
 
 # Questions for Stevie:
 
