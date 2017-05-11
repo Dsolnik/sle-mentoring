@@ -331,7 +331,7 @@ You can use the `mongofiles` utility (included w/ MongoDB distributions)to uploa
 # Chapter 7 - Aggregation 
 The aggregation framework lets you transform and combine documents in a collection. THrough this we can build pipelines that process a stream of documents through several building blocls: filtering, projecting, grouping, sorting, limiting and skipping. 
 
-### Pipeline Operations
+## Pipeline Operations
 Each operator receives a stream of documents, doe some type of transformation on these docs, and then passes on the results of the transformation. If it's the last one then the results are returned to the client.
 
 __Common Pipeline Operators__: 
@@ -380,7 +380,7 @@ __Common Pipeline Operators__:
 __ Advice on Pipelines__
 Attempt to filter out as many documents (as well as fields) as possible at the beginninng of your pipeline before hitting any `"$project"`, `"$group"`, or `"$unwind"` operations. MongoDB won't allow a single aggregation to use more than a fraction of the system's memory and will error out if it is the case. If you can reduce the result set size with a selective `"$match"`, you can use the pipeline for real-time aggregations :smiley:
 
-### MapReduce
+## MapReduce
 MapReduce solves some problems that are too complex to express using the aggregation framework's query language. MapReduce tends to be fairly slow and __should not be used for real-time analysis__. 
 
 __How MapReduce Works__: 
@@ -392,7 +392,7 @@ __How MapReduce Works__:
 
 # Chapter 8 - Application Design 
 
-### Normalization vs Denormalization
+## Normalization vs Denormalization
 
 * __Normalization__ is dividing data into multiple collections with references between collections
 * __Denormalization__ is the opposite of normalization - it embeds all the data in a single document.
@@ -401,7 +401,7 @@ With normalization, to change the data, only one document must be documented. Ho
 
 With denormalization, instead of docuuments containing references to one definitive copy of the data, many documents may have copies of that data, meaning that multiple documents need to be updated if the information changes, but all related data can be fetched with a single query. 
 
-### Embedding vs References
+## Embedding vs References
 When to embed data within a document (i.e., include it verbosely), or reference it (i.e., store it in it's own collection)
 
 Embedding is better for... | References are better for...
@@ -416,7 +416,7 @@ Fast reads | Fast writes
 __Good rule of thumb__: common relationships we see are 1-1, 1-many, or many-many. When using MongoDB, it's conceptually useful to split "many" into "many" and "few". Generally, "few" relationships will work better with embedding, and "many" relationships will work better as references. 
 
 
-### Friends, Followers and other inconveniences
+## Friends, Followers and other inconveniences
 To mitigate the volatile field of followers, we succumb to normalizing to the point where we store follower relations in another collection. Although it takes an extra query to get the followers, this keeps our user documents svelte, and we are able to keep a collection that matches followers to followees with documents that look something like this:
 ```
 {
@@ -430,7 +430,7 @@ To mitigate the volatile field of followers, we succumb to normalizing to the po
 ```
 
 
-### Optimizations for Data Manipulations
+## Optimizations for Data Manipulations
 To optimize your app, you must first know what it's bottleneck is by evaluating its read and write performance.
 
 Optimizing reads generally involves having the correct indexes and returning as much of the info as possible in a single document. 
@@ -438,7 +438,7 @@ Optimizing writes usually involves minimizing the number of indexes you have and
 
 Since there are trade-offs between schemas that are optimized for writing quickly and those that are optimized for reading quickly, you have to decide which is more important for your app. This also includes factoring in not only the importances of reads vs writes, but also their proportions. 
 
-### Planning out Databases and Collections
+## Planning out Databases and Collections
 
 For databases, the big issues to consider are locking (read/write lock per database) and storage.
 * user collections are high-value -- it's paramount to keep that user data safe
