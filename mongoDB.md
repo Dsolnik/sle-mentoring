@@ -449,6 +449,14 @@ Be aware that there are some limitations when using multiple databaes, for insta
 
 
 
+# Chapter 9 - Setting up a Replica Set
+
+### Introduction to Replication
+
+Up to now we've been using a _standalone_ server, a single _mongod_ server. It's an easy way to get started but a __dangerous way to run in production__. What happens if your server crashes, becomes unavailable, or there are problems with the hardware? We solve this problem with replication.
+
+**_Replication_ is a way of keeping identical copies of your data on multiple servers and is recommended for _all_ production deployments. Replication keeps your app running and your data safe, even if something happens to one or more of your servers.** 
+
 
 
 
