@@ -9,11 +9,11 @@ _MongoDB was designed to scale out._ Its documented-oriented model makes it easi
 
 ### Basic MongoDB Concepts
 
-* a _document_ is the basic unit of data for MongoDB -- thes ame to a _row_ in a relational db.
+* a _document_ is the basic unit of data for MongoDB -- the same to a _row_ in a relational db.
   - every document has a special key, `_id` that is unique within a collection
 * a _collection_ is the equivalent of a table with a dynamic schema
 * a single instance of MongoDB can host multiple independent _databases_, each of which can have its own collections.
-* MongoDB cmoes with a JS shell, used for admin and data manipulation
+* MongoDB comes with a JS shell, `mongo`, used for admin and data manipulation
 
 ## Documents 
 
@@ -26,10 +26,10 @@ _MongoDB was designed to scale out._ Its documented-oriented model makes it easi
 * A collection is a group of documents.
 * Collections have _dynamic schemas_, meaning documents within a single collection can have any number of different "shapes"
 * With no need for separate schemas for different kinds of documents, why should we use more than one collection? There are several good reasons:
-    * Separation of Concerns: devs need to ensure that each query is only returning documents of a certain type, or that the app code performing the query can handle documents of different shapes.
-    * Speed: It is much faster get a list of collections than to extra a list of the types in a collection. 
-    * Data Locality & Reduced Disk Seeks: grouping documents of the same kind together in the same collection allows for data locality. This leads to fewer disk seeks.
-    * Efficient Indexing: by putting documents of a single type into the same collection, we can index our collections more efficiently.
+    * __Separation of Concerns__: devs need to ensure that each query is only returning documents of a certain type, or that the app code performing the query can handle documents of different shapes.
+    * __Speed__: It is much faster get a list of collections than to extra a list of the types in a collection. 
+    * __Data Locality & Reduced Disk Seeks__: grouping documents of the same kind together in the same collection allows for data locality. This leads to fewer disk seeks.
+    * __Efficient Indexing__: by putting documents of a single type into the same collection, we can index our collections more efficiently.
 
 
 ## Naming
@@ -38,9 +38,9 @@ _MongoDB was designed to scale out._ Its documented-oriented model makes it easi
     * i.e., blog.posts and blog.authors insinuate that these are two child collections from the parent blog collection. 
 
 ## Databases
-MongoDB groups collections into _databases_. A dtabase has its own permissions and each database is stored in separate files on disk.
+MongoDB groups collections into _databases_. A database has its own permissions and each database is stored in separate files on disk.
 
-Reserved Database names:
+__Reserved Database names__:
   * _admin_: this is the "root" db, in terms of auth. if a user is added to the _admin_ db, the user automatically inherits permissions for all databases. 
   * _local_: this database will never be replicated and can be used to store any collections that should be local to a single server. 
   * _config_ when MongoDB is being used in a sharded setup, it uses the _config_ db to store information about shards
@@ -60,7 +60,7 @@ Documents in MongoDB can be thought of as _JSON-like_. They have the 6 data type
   * __code__ : Queries and Documents can contain arbitrary JS code.
   
  
-## MongoDB Shell
+## MongoDB Shell, `mongo`
 
 * __Create__: `db.collection.insert()`
 * __Read__: `db.collection.findOne()` ; or `find()` for many
@@ -128,7 +128,7 @@ Usually only certain portions of a document need to be updated. You can update s
   - remove the key altogether using `"$unset"`
 
 ### Incrementing++ and Decrementing--
-the `"$inc"` `"$decr"` and  modifier can be used to change the value for an existing key or to create a new key, and is useful for anything that has a changeable, numeric value. `"$inc"` is similar to `"$set"`, but it is designed for incrementing and decrementing numbers only.  
+the `"$inc"` and `"$decr"`  modifier can be used to change the value for an existing key or to create a new key, and is useful for anything that has a changeable, numeric value. `"$inc"` is similar to `"$set"`, but it is designed for incrementing and decrementing numbers only.  
 
 * ex: we want to keep a running counter for each time someone visited a page. We can use the `"$inc"` modifier to incr. the value of the `"pageviews"` key. 
     ```
@@ -157,7 +157,7 @@ the `"$inc"` `"$decr"` and  modifier can be used to change the value for an exis
 ## Updating Multiple Documents
 Updates, by default, update only the 1st document found that matches the criteria. To modify all of the documents matching the criteria, you can pass `true` as the fourth parameter to update.
 
-Multiupdates are a great way of performing schema migrations or rolling out new features to certain users. Fore xample we can give a gift to every user who has a bday on a certain day :
+Multiupdates are a great way of performing schema migrations or rolling out new features to certain users. For example we can give a gift to every user who has a bday on a certain day :
 
   ```
   > db.users.update({"birthday" : "10/13/2017"},
@@ -172,8 +172,7 @@ the `find()` method is used to perform queries in MongoDB. Querying returns a su
 * Sometimes you don't need all the key/value pairs in a document returned. If this is the case, you can pass a second argument to `find()` specifying the keys you want
     * i.e., `db.users.find({}, {"username" : 1, "email": 1})` returns just the key/values for username and email for every document in the users collection
         - you can exclude specific key/value pairs from the results of a query by setting the value of the 2nd parameter key/value pair to `0`
-* _Limitations_:
-    * the value of a query document must be constant as far as the database is concerned. You can make it a normal variable in your own code. 
+* _Limitations_: the value of a query document must be constant as far as the database is concerned. You can make it a normal variable in your own code. 
 
 
 ## Query Criteria 
@@ -189,7 +188,7 @@ the `find()` method is used to perform queries in MongoDB. Querying returns a su
 __`"$where"` should not be used unless strictly necessary.__ For queries that cannot be done any other way, the `"$where"` clause allows you to execute arbitrary JS as part of your query. You should only use `"$where"` only when there is no other way of doing the query.
 
 ## Server-side Scripting
-Server-side JS is susceptible to injection attacks similar to those that occur in a relationalDB. By following certain riles around accepting input, you can use use JS safely:
+Server-side JS is susceptible to injection attacks similar to those that occur in a relationalDB. By following certain rules around accepting input, you can use use JS safely:
 * turn off JS execution altogether by running mongod with the `--noscripting` option
 * make sure you aren't accepting user input and passing it directly to mongod
 
