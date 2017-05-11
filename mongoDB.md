@@ -381,6 +381,24 @@ __ Advice on Pipelines__
 Attempt to filter out as many documents (as well as fields) as possible at the beginninng of your pipeline before hitting any `"$project"`, `"$group"`, or `"$unwind"` operations. MongoDB won't allow a single aggregation to use more than a fraction of the system's memory and will error out if it is the case. If you can reduce the result set size with a selective `"$match"`, you can use the pipeline for real-time aggregations :smiley:
 
 ### MapReduce
+MapReduce solves some problems that are too complex to express using the aggregation framework's query language. MapReduce tends to be fairly slow and __should not be used for real-time analysis__. 
+
+__How MapReduce Works__: 
+1. __Map step__: It starts with the map step, which _maps_ an operation onto every document in a collection. That operation could be either "do nothing" or "emit these keys with X values". 
+2. __Shuffle step__: keys are grouped and lists of emitted values are created for each key. 
+3. __Reduce step__: takes the list of values from step 2, and _reduces_ it to a single element. This element is returned to the shuffle step until each key has a list containing a single value: the result. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Questions for Stevie:
 
