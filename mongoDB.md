@@ -652,8 +652,9 @@ __NOTE__: The difference between replication and sharding: replication creates a
 3. Replica Sets; their architectures, configurations - permissions to read from secondaries?
 
 
-
-
+# To-Do
+[] make sure s3 backups are good
+[] monitoring service 
 
 
 
@@ -661,3 +662,6 @@ __NOTE__: The difference between replication and sharding: replication creates a
 
 1. When would you want to Index an Array? Since Indexes on array elements do not keep any notion of position, what's the point if you can't get the top or bottom of that array with an index? (pg. 97)
 2. let's talk about Multiple Collections - 1 DB, vs Many DBs.
+    - start off with one dbs. then go into scaling with sharding
+3. Replica set vs S3:
+    - replica set is not replacement for backups. replica sets you're decreasing redundancy -- if one of your many machines go down. Backups like S3, are necessary because those won't be lost if someone hacks you and drops everything.
