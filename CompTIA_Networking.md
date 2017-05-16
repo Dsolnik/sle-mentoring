@@ -140,4 +140,89 @@ Transport | TCP segment/UDP datagram
 Application | The data, or payload, starts and ends here
 
 
+# Chapter 3 - Cabling & Topology 
+_topologies_ are ways of connecting computers together
 
+## Wired Networking Topologies
+
+### Bus and Ring
+The 1st generation of wired networks used these two topologies:
+1. A __bus__ topology uses a single cable (the _bus_) to connect all of the computers in a line. 
+    * a network using a bus topology needs termination at each end of the cable to prevent a signal sent from one computer from reflecting at the ends of the cable, which will bring the network down
+2. A __ring__ topology connects one computer to the enxt in the same direction in a circle. 
+    * a break in the ring network simply breaks the circuit, stopping the data flow
+
+
+### Star
+A __star__ topology uses a central connection box for all the computesr on the network. 
+    * had huge benefit over ring + bus topologies; they provided _fault tolerance_, if one of the cables breaks, all of the other computers can still communicate
+
+
+### Hybrids
+Since it was too much of a technical burden to migrate from the 1st gen (bus + ring) topologies to stars, hybrids were born by shrinking the pre-existing 1st gen topologies into a small box, and appling a star topology over it. As a result, _star-ring & star-bus_ topologies were born. 
+
+Any form of networking technology that combines a physical topology with a signaling topology is called a _hybrid_topology_.
+* __physical topology__: how the cables physically looked
+* __logical topology__: how the signals travel electronically
+
+## Wireless Networking Topologies
+
+### Mesh
+In a mesh topology network, every computer connects to every other computer by no more than 2-degrees of separation. 
+* __Partially Meshed__: at least 2 machines have redundant connections. Every machine doesn't have to connect to every other machine
+* __Fully Meshed__: every computer connects directly to every other computer. 
+
+### Point-to-Multipoint
+In a point-to-multipoint network, a single system acts as a common source through which all members of the network converse. Similar to a star topology, except this wireless topology requires an intelligent device in the center, whereas the device in the center of star topology has little more to do than to send a signal down for all connections.
+
+### Point-to-Point
+two computer connect directly together with no need for a central device (found in both wired + wireless)
+
+
+## Cabling and Connectors
+
+### Copper Cabling & Connectors
+
+* __Coaxial Cable__: contains a central conductor wire, surrounded by an insulating material, which is all surrounded by a braided metal shield. Called a 'co-ax'ial cable because the braided metal shield and center wire share a 'common-axis'
+  * shields data transmissions from electromagnetic interference (EMI) caused by lights, fans, copy machines and other typical office items. EMI is dangerous because it can be interpreted by a NIC and shutdown a network. 
+  * these cables are found today to:
+      - connect a cable model to an Internet Service Provider (ISP)
+      - connect cable boxes to televisions (lol - circa 2000s), but also use an _F-Connector_ that helps screws for a more secure connection
+
+* __Twisted Pair__: cables that are composed of multiple pairs of wires twisted around each other at specific intervals. The twists reduced interference, called _cross-talk_. Two main types of twisted-pair cabling:
+  1. _Shielded Twisted Pair (STP)_: twisted pairs of wires surrounded by shielding to protect them from EMI
+  2. _Unshielded Twisted Pair (UTP)_: most common in network cabling today. Simply wrapped in plastic - doesn't provide protection from EMI. 
+
+Category (CAT) ratings are rated in megahertz (MHz), indicating the highest frequency the cable can handle
+
+CAT Rating | Max Frequency | Max Bandwidth | Status with TIA/EIA
+------------ | ------------- | ------------
+CAT 3 | 16 MHz | 4 Mbps | Recognized 
+CAT 5 | 100 MHz | 100 Mbps | No longer recognized 
+CAT 6 | 250 MHz | 10000 Mbps | Recognized
+CAT 6a | 500 MHz | 10000 Mbps | Recognized
+
+### Fiber-Optic Cabling and Connectors
+Fiber-optic cable transmits light rather than electrictiy, making it attractive for both high-EMI areas and long-distance transmissions. 
+
+Fiber-optic cable has 4 components:
+1. The glass fiber itself (the _core_)
+2. the _cladding_; the part that makes the light reflect down the fiber 
+3. _buffer_ material to give strength
+4. the insulating jacket
+
+Fiber-Optic Cable Connectors must be installed in pairs. 
+* SC connector (stick and click): straight push in connector
+* LC connector: always duplex; both the send and receive cables are attached (has two-pronged head) 
+* ST connector (snap and twist): the bayonet-style connectors, have a stic
+* FC connector: you screw it into place to eliminate problems with high frequency
+
+
+
+## EXAM TIPS 
+* Make sure you know all of your topologies!
+* know all of your cables!
+* The Network+ exam is only interested in your knowledte of CAT3, CAT5, CAT 6 and CAT 6a cables
+* Need to know Fiber-Optic cable connectors: ST, SC, LC, and FC
+* __Concentrate on UTP__ that's where the hardest CompTIA Network+ exam questions come into play. 
+    - also review: coax, STP, and fiber-optics
