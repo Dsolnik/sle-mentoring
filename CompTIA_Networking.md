@@ -17,11 +17,12 @@ CompTIA Networking+ Domain | Percentage
 
 ## The OSI 7-layer model
 
-* __Layer 7 - Application__:
-* __Layer 6 - Presentation__:
-* __Layer 5 - Session__:
-* __Layer 4 - Transport__:
+* __Layer 7 - Application__: this layer refers to the code built into all operating systems that enables network-aware applications. All operating systems have _Application Program Interfaces (APIs)_ that provide a standard way for programmers to enhance or extend an application's capabilities.
+* __Layer 6 - Presentation__: this layer translates data from lower levels into a format usable by the application layer and vice versa. 
+* __Layer 5 - Session__: this layer connects applications to applications (a session); this layer initiates sessions, accepts incoming sessions and opens and closes existing sessions. 
+* __Layer 4 - Transport__: this layer is the assembler/disassembler software, where it breaks up the data into chunks called segments or datagrams. It also initializes requests for packets that weren't received in a good order. 
 * __Layer 3 - Network__: At this layer, containers called packets get created and addressed so they can go from one network to another. This is the last layer that deals directly with hardware. ALl the other layers of the OSI seven-layer model work strictly within software. 
+   * Routers are found here
 * __Layer 2 - Data Link__: Any device that deals with a MAC address is part of this layer. __The Data Link layer is the _only_ layer that has sublayers: the LLC and MAC.__
     * NIC is found here, although it is argued to be at Layer 1 since it puts the ones and zeroes on the network cable, but the most common approach is that it's at layer 2
 * __Layer 1 - Physical__: This layer defines the method of moving data between computers. Anything that moves data from one system to another is apart of the Physical Layer.
@@ -64,7 +65,7 @@ Two distinct jobs  a NIC performs to keep this data data moving:
 ### Beyond the Single Wire - Network Software (Layers 3-7)
 * __Network Protocol__: creates unique identifiers for each system, and creates a set of communication rules for issues like how to handle data chopped up into multiple packets and how to ensure those packets get from one subnet to another. 
 
-#### TCP/IP
+#### IP - playing with layer 3, the Network Layer
 
 TCP/IP is really several network protocols designed to work together, aka a _protcol suite_. 
 TCP stands for _Transmission Control Protocol_, and IP stands for _Internet Protocol_. 
@@ -88,6 +89,55 @@ Destination IP Address | Source IP address | Data
 
 Each IP packet is handed to the NIC, which then encloses the IP packet in a regular frame, creating a _packet within a frame_. 
 
+## The TCP/IP model
+this model consists of four layers:
+
+1. Application
+2. Transport
+3. Internet: IP addressing occurs here, IP packets are created here, and routers are found here along with the magic used to get IP packets to the next router
+4. Link/Network Interface: here resides the cabling, hubs, physical addresses and NICs
+
+
+### The Link Layer
+The TCP/IP model lumps together the OSI model's layers 1 & 2 into a single layer called the _Link Layer/Network Interface_. __Think about the TCP/IP model in packets and frames.__ Any part of the network that deals with complete frames is in the Link layer. The moment the frame information is stripped away from an IP packet, we move out of the link layer and into the Internet layer. 
+
+
+### The Internet Layer
+Aka the "IP packet" layer. Any device or protocol that deals with pure IP packets - getting an IP packet to its destination - sits in this layer. The Internet layer doesn't care about the type of data an IP packet carries, nor does it care if the data gets there in good order or not. 
+
+### Transport Layer
+This layer combines features of the OSI Transport & Session layers with a dash of Application layer.
+
+#### Connection-Oriented vs. Connectionless Communication
+Everything we do on the internet is split up into Connection-Oriented or Connectionless. The connection-oriented protocol is Transmission Control Protocol (TCP), and the connectionless protocol is _User Datagram Protocol (UDP)_
+
+* TCP example: Post Office Protocol (POP), is used for sending e-mail messages, requires that the client and server verify they have a good connection before a message is sent -- you don't want your e-mail message to be a corrupt mess when it arrives
+* UDP example: in Voice over IP (VoIP), the call is made without verifying first whether another device is there -- hence, why you can call someone even if they are offline
+
+#### Segments within Packets
+If we strip the IP address from an IP packet, what's left is a chunk of data in another container called the _TCP segment_.
+
+* __TCP Segment__: has fields such as checksum, flags, acknowledgement etc. to ensure that the data gets to its destination in good order. 
+
+__In TCP...__ Data comes from the application layer, then the transport layer breaks that data into chunks, adding port numbers and sequence numbers, creating the TCP segment. The transport layer then hands the TCP segment to the Internet layer, which in turn, creates the IP packet. 
+__In UDP...__ UDP does the same as TCP, except since it doesn't care if the receiving computer gets its data, a UDP datagram lacks most of the extra fields found in TCP segments.
+
+### The Application Layer
+The TCP/IP _Application Layer_ combines features of the top 3 layesr of the OSI model. Every app must know how to initiate, control, and disconnect from a remote system. 
+
+From the TCP/IP's unique port numbering system, each app has a unique number from 1-65535. A well known port is the HTTP, the one that makes web pages work, uses port 80. 
+
+
+
 
 ## EXAM TIPS
 * MAC Addresses are also known as _physical Addresses_
+* Remember at what layer each encapsulation happens
+TCP/IP Model Layer | Data Structure 
+Link | Frame
+Internet | IP packet
+Transport | TCP segment/UDP datagram
+Application | The data, or payload, starts and ends here
+
+
+
