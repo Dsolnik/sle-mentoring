@@ -196,7 +196,7 @@ two computer connect directly together with no need for a central device (found 
 Category (CAT) ratings are rated in megahertz (MHz), indicating the highest frequency the cable can handle
 
 CAT Rating | Max Frequency | Max Bandwidth | Status with TIA/EIA
------------- | ------------- | ------------
+------------ | ------------- | ------------ | ------------
 CAT 3 | 16 MHz | 4 Mbps | Recognized 
 CAT 5 | 100 MHz | 100 Mbps | No longer recognized 
 CAT 6 | 250 MHz | 10000 Mbps | Recognized
