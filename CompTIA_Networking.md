@@ -4,7 +4,7 @@
 
 100 questions, 90 minutes to complete. Must get a passing score of 720 on a scale of 100-900. Comprised of multiple choice and performance based questions. Many of the test objectives deal with _real world trouble shooting_.
 
-CompTIA Networking+ Domain | Percentage
+CompTIA Networking + Domain | Percentage
 ------------ | -------------
 1.0 Network Architecture | 22%
 2.0 Network Operations | 20%
@@ -134,6 +134,7 @@ From the TCP/IP's unique port numbering system, each app has a unique number fro
 ## EXAM TIPS
 * MAC Addresses are also known as _physical Addresses_
 * Remember at what layer each encapsulation happens
+
 TCP/IP Model Layer | Data Structure 
 ------------ | -------------
 Link | Frame
