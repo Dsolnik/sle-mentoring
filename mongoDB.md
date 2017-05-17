@@ -643,7 +643,47 @@ __NOTE__: The difference between replication and sharding: replication creates a
 
 ... Return to Sharding when needed...
 
-* 
+# Chapter 22 - Making Backups
+
+## Backing up a Server
+Taking a backup generally requires reading all your data into memory. Thus backups should generally be done on replica set secondaries, or for standalone servers, at an offtime.
+
+### Filesystem Snapshot
+the simplest way to makea backup is to take a filesystem (fs) snapshot. This requires:
+1. your fs to support snapshotting
+2. must be running `mongod` with _journaling_ enabled 
+
+to restore from a screenshot, ensure that `mongod` isn't running and restore the snapshot then start `mongod` once more.
+
+### Copying Data Files
+we can also make backups by copying everything in a data directory. In linux we can do this with:
+
+    $ cp - R /data/db/* /mnt/external-drive/backup
+    
+To avoid any new writes from occuring during the backup and to flush all changes to disk, the easy way to copy w/o any problems is to:
+1. shut down `mongod`
+2. copy the files
+3. start `mongod` back up again
+
+To restore from data directory copies:
+1. ensure that `mongod` isn't running and that the data directory you want to restore into is empty
+2. copy the backed-up files to the data directory
+3. start `mongod` 
+
+
+### Using `mongodump`
+`mongodump` is a good way to backup individual dbs, collections, or even subsets of collections. It is slower to backup and restore from it, and has issues with replica sets. 
+
+## Backing up a Replica set
+
+Generally, you should take backups from a secondary: this keeps load off of the primary and you can locak a secondary without affecting your application. You can use any of the 3 previously mentioned methods to backup a replica set member, __but fs snapshot or data file copy are recommended__. 
+
+... Return to Backing up a Sharded Cluster when needed...
+
+### Using mongodump
+
+
+
 
 
 # Items to address/optimize within my db
