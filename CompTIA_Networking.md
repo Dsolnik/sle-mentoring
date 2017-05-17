@@ -120,10 +120,11 @@ If we strip the IP address from an IP packet, what's left is a chunk of data in 
 * __TCP Segment__: has fields such as checksum, flags, acknowledgement etc. to ensure that the data gets to its destination in good order. 
 
 __In TCP...__ Data comes from the application layer, then the transport layer breaks that data into chunks, adding port numbers and sequence numbers, creating the TCP segment. The transport layer then hands the TCP segment to the Internet layer, which in turn, creates the IP packet. 
+
 __In UDP...__ UDP does the same as TCP, except since it doesn't care if the receiving computer gets its data, a UDP datagram lacks most of the extra fields found in TCP segments.
 
 ### The Application Layer
-The TCP/IP _Application Layer_ combines features of the top 3 layesr of the OSI model. Every app must know how to initiate, control, and disconnect from a remote system. 
+The TCP/IP _Application Layer_ combines features of the top 3 layers of the OSI model. Every app must know how to initiate, control, and disconnect from a remote system. 
 
 From the TCP/IP's unique port numbering system, each app has a unique number from 1-65535. A well known port is the HTTP, the one that makes web pages work, uses port 80. 
 
@@ -134,6 +135,7 @@ From the TCP/IP's unique port numbering system, each app has a unique number fro
 * MAC Addresses are also known as _physical Addresses_
 * Remember at what layer each encapsulation happens
 TCP/IP Model Layer | Data Structure 
+--------------- | ---------------
 Link | Frame
 Internet | IP packet
 Transport | TCP segment/UDP datagram
