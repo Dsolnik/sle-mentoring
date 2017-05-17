@@ -135,7 +135,7 @@ From the TCP/IP's unique port numbering system, each app has a unique number fro
 * MAC Addresses are also known as _physical Addresses_
 * Remember at what layer each encapsulation happens
 TCP/IP Model Layer | Data Structure 
---------------- | ---------------
+------------ | -------------
 Link | Frame
 Internet | IP packet
 Transport | TCP segment/UDP datagram
