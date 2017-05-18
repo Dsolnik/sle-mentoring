@@ -221,6 +221,47 @@ Fiber-Optic Cable Connectors must be installed in pairs.
 * FC connector: you screw it into place to eliminate problems with high frequency
 
 
+# Chapter 4 - Ethernet Basics 
+
+### History 
+the original Ethernet used a single piece of coaxial cable in a bus topology to connect serveral computers, enabling them to transfer data at a rate of up to 3 Mbps :laughing:
+
+## Ethernet Frames
+Generic Ethernet Frame:
+
+Preamble | Recipient MAC | Sender MAC | Type | Data | Pad | FCS 
+------------ | ------------- | ------------ | ------------ | ------------ | ------------ | ------------
+
+1. __Preamble__: All Ethernet frames begin with a preamble. The preamble is added by the sending NIC. It gives a receiving NIC time to realize a frame is coming and to know exactly where the frame starts.
+2. __MAC Addresses__: MAC addresses give each NIC, often referred to as a _node_, a unique address. When a computer sends out a data frame it goes into the hub, the hub repeats an exact copy of that frame.  
+
+__NOTE - How data is sent and received:__ All the other computers on the network listen to the wire and examine the frame to see if it contains their MAC Address. If it does not, they ignore the frame. If a machine sees a frame with its MAC address, it opens the frame and begins processing the data.
+
+__WARNING__ :-1:: There is a _significant_ security risk with Ethernet networks. Network diagnostic programs, called _sniffers_ can order a NIC to run in _promiscuous mode_ -- in this mode, the NIC processes all the frames it sees on the cable, regardless of their MAC addresses. 
+
+3. __Type__: an ethernet frame may carry one of serveral types of data. Tyhe type field helps the receiving computer interpret the frame contents at a very basic level
+
+4. __Data__: the main payload 
+5. __Pad__: min size for Ethenert frame is 64 bytes. If the frame has less than that, the sending NIC will add extra data, aka a _pad_ to meet the requirement
+6. __Frame Check Sequence (FCS)__: enables Ethernet nodes to recognize when bad things ahppen to good data.
+
+## CSMA/CD
+_Carrier sense multiple access/collusion detection_ is used to determine which computer should use a shared cable at a given time. Broken down....
+
+* _Carrier sense_  means that each node using the network examines the cable before sending a data frame. If the cable is "free", the node sends out its frame.
+* _Multiple Access_ means that all machines have equal access to the wire. If the line is free any ethenernet node may send a frame. 
+
+_What happens if two machines, listening to the same cable, send a frame simultaneously?_ 
+A __collision__ occurs, and both transmissions are lost. When 2 NICs send at the same time, they immediatly know that a collision has occured and both nodes stop transmitting. :star: They then send generate a random number (RNG) to determine how long to wait before trying again. Whichever node generates the lowest random number begins its retransmission first, winning the competition to use the wire first (_lol @ runescape pid system reference_) :star:
+
+## EXAM TIPS
+* the terms _frame_ and _packet_ are used interchangeably, especially on the exams.  Remember that packets are associated with data assembled by the IP protocol at layer 3 of the OSI seven-layer model. 
+
+
+
+
+
+
 
 ## EXAM TIPS 
 * Make sure you know all of your topologies!
