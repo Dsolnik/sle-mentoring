@@ -221,6 +221,18 @@ Fiber-Optic Cable Connectors must be installed in pairs.
 * FC connector: you screw it into place to eliminate problems with high frequency
 
 
+    
+
+## EXAM TIPS 
+* Make sure you know all of your topologies!
+* know all of your cables!
+* The Network+ exam is only interested in your knowledte of CAT3, CAT5, CAT 6 and CAT 6a cables
+* Need to know Fiber-Optic cable connectors: ST, SC, LC, and FC
+* __Concentrate on UTP__ that's where the hardest CompTIA Network+ exam questions come into play. 
+    - also review: coax, STP, and fiber-optics
+
+
+
 # Chapter 4 - Ethernet Basics 
 
 ### History 
@@ -320,18 +332,3 @@ A switching loop in a network setup would bring the network down. Ethernet stand
     
   
     
-    
-
-
-
-
-
-
-
-## EXAM TIPS 
-* Make sure you know all of your topologies!
-* know all of your cables!
-* The Network+ exam is only interested in your knowledte of CAT3, CAT5, CAT 6 and CAT 6a cables
-* Need to know Fiber-Optic cable connectors: ST, SC, LC, and FC
-* __Concentrate on UTP__ that's where the hardest CompTIA Network+ exam questions come into play. 
-    - also review: coax, STP, and fiber-optics
