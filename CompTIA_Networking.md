@@ -252,10 +252,75 @@ _Carrier sense multiple access/collusion detection_ is used to determine which c
 * _Multiple Access_ means that all machines have equal access to the wire. If the line is free any ethenernet node may send a frame. 
 
 _What happens if two machines, listening to the same cable, send a frame simultaneously?_ 
+
 A __collision__ occurs, and both transmissions are lost. When 2 NICs send at the same time, they immediatly know that a collision has occured and both nodes stop transmitting. :star: They then send generate a random number (RNG) to determine how long to wait before trying again. Whichever node generates the lowest random number begins its retransmission first, winning the competition to use the wire first (_lol @ runescape pid system reference_) :star:
+
+* __Collision Domain__: group of nodes that have the capability of sending frames at the same time as each other, resulting in collisions. 
+
+## Early Ethernet Networks
+MAC addresses identify each machine on the network. CSAMA/CD determines which machine should have access to the cable, but how do we actually apply it all?
+
+### Bus Ethernet
+The original Ethernet networks employed a true bus topology, meaning every computer on a network connected to the same cable, the bus. 
+
+### 10BaseT
+10BaseT became the most popular network technology in the world -- it uses unshielded twisted-pair (UTP) cabling. Now over 99% of all networks use 10BaseT or one of its newer versions. The biggest differentiator between the 10BaseT hubs are the number of _ports_ (connections) that a single hub provides -- the more ports the more expensive the hub. 
+
+The name 10BaseT broken down 
+* the number _10_ refers to the speed: 10Mbps
+* _Base_ refers to the signaling type: baseband (_Baseband_ means that the cable only carries 1 type of signal, where as with _broadband_, the cable carries multiple signals or channels)
+* The letter _T_ refers to the type of cable used: twisted pair
+
+### UTP
+Officially, 10BaseT requires the use of CAT 3 (or higher), two-pair, unshielded twisted-pair (UTP) cables. One pair of wires sends data, while the other receives data from the hub. 
+
+* _RJ-45 Connector_, aka a _crimp_, is a 8 pinned connector for cables enabling voltage on each individual wires, introduced by 10BaseT
+
+### 10BaseFL
+* Speed: 10 Mbps
+* Signal Type: Baseband
+* Distance: 2k meters between node and hub
+* Node limit: max 1024 nodes
+* Topology: Star-bus, physical star, logical bus
+* Cable Type: multiemode fib-optic cabling with ST or SC connectors
+
+### Connecting Ethernet Segments
+* You can connect more than two hubs using either:
+    1. __Uplink ports__: allows you to connect 2 hubs using a _straight-through_ cable (must be daisy-chained: from one uplink port to one regular port)
+    2. __Crossover Cable__: uses a special cable to connect 2 hubs. These don't have to be dasiy-chained
+      
+* You can also connect Ethernet segments using a bridge
+
+### Bridges 
+a _bridge_ acts like a repeater or hub to connect 2 Ethernet networks, but it does filtering and fowarding traffic between those segments based on the MAC addresses of the computers on those segments, preserving bandwidth. 
+
+## Switched Ethernet
+Hubs were so and ineffective, so along came switches. Switches are basically hubs except with more smarts -- they act as a telephone operator, and create on-the-fly connections between two devices. What this means is:
+* Each port on a switch is in its own collision domain, plus the switch can buffer incoming frames -- meaning 2 connected nodes to a switch can send data at the same time and the switch will handle it w/o any collision :clap:
+
+### Spanning Tree Protocol (STP)
+* __Bridging Loops (aka Switching Loops)__: Redundant connections in a network with switches (because you can connect switches together in any fashion)
+
+A switching loop in a network setup would bring the network down. Ethernet standards used the STP to eliminate problems of accidental switch loops using a frame called _Bridge Protocol Data Unit (BDPU)_ to communicate distances and changes on the network. 
 
 ## EXAM TIPS
 * the terms _frame_ and _packet_ are used interchangeably, especially on the exams.  Remember that packets are associated with data assembled by the IP protocol at layer 3 of the OSI seven-layer model. 
+* If you ever run into a situation on a 10BaseT or later network in which none of the computers can get on the network, always check the hub first
+* The names of two earlier physical bus versions of Ethernet, 10Base5 and 10Base2 gave the maximum length of the bus
+    * __10Base5__ up to 500 meters long
+    * __10Base2__ up to 185 meters
+* Two terms you might see on hubs and switched and consequently, on exams are MDI and MDIX. a _media dependent interface_ (MDI) is a regular port on a hub or a switch. A _media dependent interface crossover_ (MDIX) is an uplink port.
+* Remember the 3 types of copper cables: straight-through vs. crossover vs. rollover.  
+    * Straight-through uses the same standard for the RJ-45 on both ends
+    * x-over uses 568A on one end and 568B on the other. 
+    * A _rollover_ cable has an RJ-45 on one end and a class RS-232 serial port on the other. They're used to connect a laptop or other computers directlry to a Cisco switch or router. 
+* One classic difference between a hub and a switch is in the repeating of frames during normal use. Although it's true that switches initially forward all frames, they filter by MAC address in regular use. Hubs never learn and always forward all frames. 
+* When presented with a question about _broadcast domains vs. collision domains_: in early pre-switched Ethernet networks, there was no difference between the 2. All broadcast traffic went to all nodes; all nodes connected to the same bus and thus collisions occured. __Switches eliminated collisions among the nodes attached to the switches within a broadcast domain__
+    
+    
+  
+    
+    
 
 
 
