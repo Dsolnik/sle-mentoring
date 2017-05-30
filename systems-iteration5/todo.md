@@ -45,9 +45,12 @@ Set up vim on two different machines by using an Ansible playbook
 4. explain the different process states
 
 #Practice Task 4
-1. use $dd to create a file of 1 gb 
-2. use $tar -cvf with $time and $nice val to slowest settings to get the time it takes to compress a file of that size
-3. use $tar -cvf with $time and $nice val to highest settings to get the time it takes to compress this file.
+1. find out how much space is left on a remote machine
+2. use $dd to create a file of 1 gb 
+3. use $tar -cvf with $time and $nice val to slowest settings to get the time it takes to compress a file of that size
+4. use $tar -cvf with $time and $nice val to highest settings to get the time it takes to compress this file.
+5. find out how much space is left on this machine now
+6. clean up
 
 #Practice Task 5
 What CPU processor does your computer have?
