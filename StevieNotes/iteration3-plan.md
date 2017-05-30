@@ -15,9 +15,7 @@ Extra:
 2. What was DOM manipulation like? - Is there a motivation for JQuery?
 3. What do you think about Node?
 4. What data structure is the DOM?
-5. $(function(){
-    
-    })?
+5. $(function(){})?
 6. Talk to me about hoisting.
 7. What is event bubbling? Why is this important?
 8. Prototypal Inheritance - talk to me about it - why does everyone say everything is an object in Javascript?
@@ -62,4 +60,8 @@ tell me about javascript
 * oop
 * event-driven paradigm
 * single-threaded usually
+
+
+#Question:
+eventbubbling
 * concurrent
