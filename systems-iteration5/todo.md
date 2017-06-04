@@ -11,13 +11,13 @@ Let sle know you can set up machines for him if needed
 ## What is niceness?
 _Niceness_ derives from the __nice__ program found on unix OSs. It maps a process to a number ranging from [-20, 19], where -20 is the highest priority, and 19 is the lowest priority.
 ## Memorize the following signals and give a brief description of each
-9: `SIGKILL`: Kill that can't be caught or ignored
-15: `Termination` 
-18: `SIGCONT`: continue executing, if stopped
-19: `SIGSTOP` : Stop executing (can't be caught or ignored)
-20: `SIGTSTP`: Terminal stop signal
-Which signal is the default when running $kill?
-The default signal is TERM which allows the program being killed to catch it and do some cleanup before exiting.
+- 9: `SIGKILL`: Kill that can't be caught or ignored
+- 15: `Termination` 
+- 18: `SIGCONT`: continue executing, if stopped
+- 19: `SIGSTOP` : Stop executing (can't be caught or ignored)
+- 20: `SIGTSTP`: Terminal stop signal
+- Which signal is the default when running $kill?
+    * The default signal is TERM which allows the program being killed to catch it and do some cleanup before exiting.
 
 # Practice Task 0 (recorded) -scp/sftp
 1. make a file called 1.txt
